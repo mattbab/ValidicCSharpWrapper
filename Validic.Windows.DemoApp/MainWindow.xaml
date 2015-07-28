@@ -1,0 +1,24 @@
+﻿<Window x:Class="Validic.Windows.DemoApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:v="clr-namespace:Validic.Windows.DemoApp.Views"
+        xmlns:properties="clr-namespace:Validic.Windows.DemoApp.Properties"
+        Title="Validic CSharp App " Height="800" Width="1200"
+        Icon="/Resources/Images/csharpwrapper.ico">
+    <!--    <Window.DataContext>-->
+    <!--        <vm:ValidicViewModel OrganizationId="51aca5a06dedda916400002b" AccessToken="ENTERPRISE_KEY">-->
+    <!--        </vm:ValidicViewModel>-->
+    <!--    </Window.DataContext>-->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition
+                Width="{Binding LogWindowColumnWidthSetting, Source={x:Static properties:Settings.Default}, Mode=TwoWay}" />
+        </Grid.ColumnDefinitions>
+        <v:MainView Grid.Column="0" />
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Stretch" ShowsPreview="True"
+                      Width="5" />
+        <v:LogView Grid.Column="2" />
+    </Grid>
+</Window>
