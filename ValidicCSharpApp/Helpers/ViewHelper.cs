@@ -39,6 +39,5 @@ namespace ValidicCSharpApp.Helpers
         {
             return a => fe.Dispatcher.BeginInvoke(priority, a);
         }
-
     }
 }

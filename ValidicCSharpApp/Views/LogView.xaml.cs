@@ -18,10 +18,8 @@ namespace ValidicCSharpApp.Views
         private void List_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var lv = sender as ListView;
-            if (lv == null)
-                return;
 
-            var logItem = lv.SelectedItem as LogItem;
+            var logItem = lv?.SelectedItem as LogItem;
             if (logItem == null)
                 return;
 

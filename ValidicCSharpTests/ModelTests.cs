@@ -14,15 +14,12 @@ namespace ValidicCSharpTests
     {
         public static CustomerModel Acme = new CustomerModel
         {
-            Credentials = new OrganizationAuthenticationCredentials{ OrganizationId = "51aca5a06dedda916400002b", AccessToken = "ENTERPRISE_KEY"},
-            Organization = new Organization{Name = "ACME Corp"},
-            Profile = new Profile { Uid = "52ffcb4bf1f70eefba000004", Gender = GenderType.M}
+            Credentials = new OrganizationAuthenticationCredentials {OrganizationId = "51aca5a06dedda916400002b", AccessToken = "ENTERPRISE_KEY"},
+            Organization = new Organization {Name = "ACME Corp"},
+            Profile = new Profile {Uid = "52ffcb4bf1f70eefba000004", Gender = GenderType.M}
         };
 
-
         public CustomerModel Customer = Acme;
-
-        #region Support Functions
 
         private static int MakeRandom(int to = 10000)
         {
@@ -30,15 +27,22 @@ namespace ValidicCSharpTests
             return random.Next(0, to);
         }
 
-
-        #endregion
-
+        [Test]
+        public void AddUserWithSameId()
+        {
+            var uid = MakeRandom().ToString();
+            var response1 = Customer.AddUser(uid);
+            Assert.IsTrue(response1.user._id != null);
+            Assert.IsTrue(response1.code == (int) StatusCode.Created);
+            var response2 = Customer.AddUser(uid);
+            Assert.IsTrue(response2.user == null);
+            Assert.IsTrue(response2.code == (int) StatusCode.Conflict);
+        }
 
         [Test]
         public void AppModelPopulatesCorrectly()
         {
             var client = new Client {AccessToken = Customer.Credentials.AccessToken};
-            ;
             var command = new Command()
                 .FromOrganization(Customer.Credentials.OrganizationId)
                 .GetInformationType(CommandType.Apps);
@@ -53,7 +57,6 @@ namespace ValidicCSharpTests
         public void BiometricsModelPopulatesCorrectly()
         {
             var client = new Client {AccessToken = Customer.Credentials.AccessToken};
-            ;
             var command = new Command()
                 .GetInformationType(CommandType.Biometrics)
                 .FromOrganization(Customer.Credentials.OrganizationId)
@@ -70,42 +73,31 @@ namespace ValidicCSharpTests
         {
             var response = Customer.AddUser(MakeRandom().ToString());
             Assert.IsTrue(response.user._id != null);
-            Assert.IsTrue(response.code == (int)StatusCode.Created);
-        }
-        [Test]
-        public void AddUserWithSameId()
-        {
-            var uid = MakeRandom().ToString();
-            var response1 = Customer.AddUser(uid);
-            Assert.IsTrue(response1.user._id != null);
-            Assert.IsTrue(response1.code == (int)StatusCode.Created);
-            var response2 = Customer.AddUser(uid);
-            Assert.IsTrue(response2.user == null);
-            Assert.IsTrue(response2.code == (int)StatusCode.Conflict);
+            Assert.IsTrue(response.code == (int) StatusCode.Created);
         }
 
         [Test]
         public void CanAddUserWithProfile()
         {
-            var profile = new Profile { Country = "United States", Gender = GenderType.M, Weight = 125 };
+            var profile = new Profile {Country = "United States", Gender = GenderType.M, Weight = 125};
             var response = Customer.AddUser(MakeRandom().ToString(), profile);
             Assert.IsTrue(response.user._id != null);
-            Assert.IsTrue(response.code == (int)StatusCode.Created);
+            Assert.IsTrue(response.code == (int) StatusCode.Created);
             Assert.IsTrue(response.user.profile.Gender == GenderType.M);
         }
-
 
         [Test]
         public void DiabetesModelPopulatesCorrectly()
         {
             var client = new Client {AccessToken = Customer.Credentials.AccessToken};
-            ;
+
             var command = new Command()
                 .GetInformationType(CommandType.Diabetes)
                 .FromOrganization(Customer.Credentials.OrganizationId)
                 .FromUser(Customer.Profile.Uid)
                 .FromDate("09-01-01");
-            var json = client.PerformCommand(command);
+
+            var json = Task.Run(async () => await client.PerformCommandAsync(command)).Result;
 
             var diabetes = json.ToResult<List<Diabetes>>();
             Assert.True(diabetes.Object.First().Id != null);
@@ -115,7 +107,6 @@ namespace ValidicCSharpTests
         public void FitnessModelPopulatesCorrectly()
         {
             var client = new Client {AccessToken = Customer.Credentials.AccessToken};
-            ;
             var command = new Command()
                 .FromOrganization(Customer.Credentials.OrganizationId)
                 .GetInformationType(CommandType.Fitness)
@@ -152,12 +143,10 @@ namespace ValidicCSharpTests
 
             var json = await client.PerformCommandAsync(command);
             var org = json.ToResult<Organization>();
-            
+
             Assert.IsTrue(org.Summary.Limit == 100);
             Assert.IsTrue(org.Object.As<Organization>().Name == Customer.Organization.Name);
         }
-
-
 
         [Test]
         public void ListOfUsersFromOrganizationParsesCorrectly()
@@ -175,12 +164,12 @@ namespace ValidicCSharpTests
         [Test]
         public async void MyModelPopultesCorrectlyAsync()
         {
-            var client = new Client { AccessToken = Customer.Credentials.AccessToken };
+            var client = new Client {AccessToken = Customer.Credentials.AccessToken};
             // 1. Get user "authentication_token"
             var refreshToken = await client.GetUserRefreshTokenAsync(Customer.Profile.Uid, Customer.Credentials.OrganizationId);
 
             // 2
-            client = new Client{AccessToken = null};
+            client = new Client {AccessToken = null};
             var command = new Command()
                 .GetInformationType(CommandType.Me)
                 .AuthenticationToken(refreshToken.Object.AuthenticationToken);
@@ -195,7 +184,6 @@ namespace ValidicCSharpTests
         public void NutritionModelPopulatesCorrectly()
         {
             var client = new Client {AccessToken = Customer.Credentials.AccessToken};
-            ;
             var command = new Command()
                 .FromOrganization(Customer.Credentials.OrganizationId)
                 .GetInformationType(CommandType.Nutrition)
@@ -209,13 +197,13 @@ namespace ValidicCSharpTests
         [Test]
         public async Task ProfileModelPopulatesCorrectly()
         {
-            var client = new Client { AccessToken = Customer.Credentials.AccessToken };
+            var client = new Client {AccessToken = Customer.Credentials.AccessToken};
 
             // 1. Get user "authentication_token"
             var refreshToken = await client.GetUserRefreshTokenAsync(Customer.Profile.Uid, Customer.Credentials.OrganizationId);
 
             // 2
-            client = new Client { AccessToken = null };
+            client = new Client {AccessToken = null};
             var command = new Command()
                 .AuthenticationToken(refreshToken.Object.AuthenticationToken)
                 .GetInformationType(CommandType.Profile);
@@ -230,7 +218,6 @@ namespace ValidicCSharpTests
         public void RoutineModelPopulatesCorrectly()
         {
             var client = new Client {AccessToken = Customer.Credentials.AccessToken};
-            ;
             var command = new Command()
                 .FromOrganization(Customer.Credentials.OrganizationId)
                 .GetInformationType(CommandType.Routine)
@@ -274,7 +261,6 @@ namespace ValidicCSharpTests
         public void WeightModelPopulatesCorrectly()
         {
             var client = new Client {AccessToken = Customer.Credentials.AccessToken};
-            ;
             var command = new Command()
                 .FromOrganization(Customer.Credentials.OrganizationId)
                 .FromUser(Customer.Profile.Uid)

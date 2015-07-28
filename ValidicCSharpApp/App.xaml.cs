@@ -1,14 +1,14 @@
 ﻿using System.Windows;
+using Validic.CSharp.AppLib.ViewModels;
 using ValidicCSharp;
 using ValidicCSharpApp.Helpers;
-using ValidicCSharpApp.ViewModels;
 
 namespace ValidicCSharpApp
 {
     /// <summary>
     ///     Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         // private static readonly ILog Log = LogManager.GetLogger(typeof(App));
         private readonly MainWindow _mainWindow = new MainWindow();
