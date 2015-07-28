@@ -38,9 +38,11 @@
     <Compile Include="App.cs" />
     <Compile Include="NonNullToBooleanConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\ListViewDemoPage.cs" />
     <Compile Include="Views\MainRecordView.xaml.cs">
       <DependentUpon>MainRecordView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MainRecordView2.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>

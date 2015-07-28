@@ -14,8 +14,8 @@ namespace Validic.Mobile.DemoApp.Views
 
         private async void Button_OnClicked(object sender, EventArgs e)
         {
-            var page = new MainRecordView();
-            page.CurrentPage = page.Children[0];
+            var page = new MainRecordView2();
+            // page.CurrentPage = page.Children[0];
             // load services on the next page
             await Navigation.PushAsync(page);
 //            page.SelectFirstPage();
