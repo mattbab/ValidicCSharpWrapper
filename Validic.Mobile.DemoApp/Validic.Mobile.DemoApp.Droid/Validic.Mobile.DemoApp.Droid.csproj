@@ -109,6 +109,14 @@
     <Content Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\InfoMetersWin\Logging\Validic.Logging.Android\Validic.Logging.Android.csproj">
+      <Project>{b445f87f-07ff-444d-a63f-2fa93373e925}</Project>
+      <Name>Validic.Logging.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\InfoMetersWin\Logging\Validic.Logging\Validic.Logging.csproj">
+      <Project>{21872986-2697-4296-bd31-63e5a4eff585}</Project>
+      <Name>Validic.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Validic.Mobile.DemoApp\Validic.Mobile.DemoApp.csproj">
       <Project>{7d5245d4-fb2b-48b3-a66f-79ff63f05057}</Project>
       <Name>Validic.Mobile.DemoApp</Name>

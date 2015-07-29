@@ -100,7 +100,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Validic.Core.AppLib\Validic.Core.AppLib.csproj">
       <Project>{69f3d34d-a870-4c09-b0a7-3d9d9d2204aa}</Project>
-      <Name>Validic.CSharp.AppLib</Name>
+      <Name>Validic.Core.AppLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Validic.Core\Validic.Core.csproj">
       <Project>{66bb27ac-7269-4630-80db-bd4faf2295f8}</Project>

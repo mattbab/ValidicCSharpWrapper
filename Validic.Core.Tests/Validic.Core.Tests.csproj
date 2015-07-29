@@ -80,7 +80,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Validic.Core\Validic.Core.csproj">
       <Project>{66bb27ac-7269-4630-80db-bd4faf2295f8}</Project>
-      <Name>ValidicCSharpPortable</Name>
+      <Name>Validic.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
