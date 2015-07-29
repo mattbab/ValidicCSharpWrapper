@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using Validic.Core.Request;
 using Validic.Core.Utility;
-using Validic.Core.Tests;
 
 namespace Validic.Core.Tests
 {

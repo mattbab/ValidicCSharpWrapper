@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
-using System.Runtime.InteropServices;
 using Xamarin.Forms;
 
 namespace Validic.Mobile.DemoApp.Views

@@ -11,7 +11,7 @@ namespace Validic.Mobile.DemoApp.Views
         {
             InitializeComponent();
             CurrentPageChanged += async (s, e) => await UpdatePageAsync();
-            this.Appearing += OnAppearing;
+            Appearing += OnAppearing;
         }
 
         private async void OnAppearing(object sender, EventArgs eventArgs)
@@ -20,8 +20,6 @@ namespace Validic.Mobile.DemoApp.Views
             await Task.Delay(1000);
             await UpdatePageAsync();
         }
-
-
 
         private async Task UpdatePageAsync()
         {

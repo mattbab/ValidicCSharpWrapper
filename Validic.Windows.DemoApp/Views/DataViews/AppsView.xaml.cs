@@ -29,7 +29,7 @@ namespace Validic.Windows.DemoApp.Views.DataViews
 
         private void CommandBinding_OnExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            ViewHelper.CopyCommandOnExecuted<Validic.Core.Model.App>(sender, e);
+            ViewHelper.CopyCommandOnExecuted<Core.Model.App>(sender, e);
         }
     }
 }
