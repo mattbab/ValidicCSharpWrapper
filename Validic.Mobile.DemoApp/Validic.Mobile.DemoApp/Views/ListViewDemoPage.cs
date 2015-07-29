@@ -1,11 +1,14 @@
 ﻿using System.Diagnostics;
 using Validic.Core.AppLib.ViewModels;
+using Validic.Logging;
 using Xamarin.Forms;
 
 namespace Validic.Mobile.DemoApp.Views
 {
     internal class ListViewDemoPage : ContentPage
     {
+        private readonly ILog _log = LogManager.GetLogger("ListViewDemoPage");
+
         private readonly ListView _listView;
 
         public ListViewDemoPage()
@@ -16,6 +19,7 @@ namespace Validic.Mobile.DemoApp.Views
                 Font = Font.BoldSystemFontOfSize(50),
                 HorizontalOptions = LayoutOptions.Center
             };
+
 
             // Define some data.
             _listView = new ListView
@@ -42,8 +46,15 @@ namespace Validic.Mobile.DemoApp.Views
             };
         }
 
+        private object _lastTemplate = null;
+
         private object LoadTemplate()
         {
+            if (_lastTemplate != null)
+                return _lastTemplate;
+
+            _log.Debug("LoadTemplate");
+
             // Create views with bindings for displaying each property.
             var nameLabel = new Label();
             nameLabel.SetBinding(Label.TextProperty, new Binding("Me.Id", BindingMode.OneWay));
@@ -55,8 +66,9 @@ namespace Validic.Mobile.DemoApp.Views
             //boxView.SetBinding(BoxView.ColorProperty, "FavoriteColor");
 
             // Return an assembled ViewCell.
-            return new ViewCell
+            _lastTemplate = new ViewCell
             {
+
                 View = new StackLayout
                 {
                     Padding = new Thickness(0, 5),
@@ -77,11 +89,13 @@ namespace Validic.Mobile.DemoApp.Views
                     }
                 }
             };
+            return _lastTemplate;
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            _log.Debug("[OnAppearing] : Title = {0}", Title);
             var title = Title;
             if (title.ToUpper() == "ME")
             {
@@ -90,10 +104,9 @@ namespace Validic.Mobile.DemoApp.Views
                     return;
 
 
-                Debug.WriteLine("A");
                 await model.SelectedMainRecord.GetOrganizationMeDataAsync();
-                Debug.WriteLine("B");
                 _listView.ItemsSource = model.SelectedMainRecord.MeData;
+                _log.Debug("_listView.ItemsSource = model.SelectedMainRecord.MeData: Finish");
             }
         }
     }

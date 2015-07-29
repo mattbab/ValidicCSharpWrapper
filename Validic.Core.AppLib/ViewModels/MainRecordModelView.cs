@@ -7,11 +7,14 @@ using GalaSoft.MvvmLight.Command;
 using Validic.Core.Model;
 using Validic.Core.Request;
 using Validic.Core.Utility;
+using Validic.Logging;
 
 namespace Validic.Core.AppLib.ViewModels
 {
     public class MainRecordModelView : BaseViewModel
     {
+        private readonly ILog _log = LogManager.GetLogger("ListViewDemoPage");
+
         #region Constructor
 
         public MainRecordModelView()
@@ -158,6 +161,7 @@ namespace Validic.Core.AppLib.ViewModels
 
         public async Task GetOrganizationMeDataAsync()
         {
+            _log.Debug("[GetOrganizationMeDataAsync]");
             var oac = OrganizationAuthenticationCredential;
             if (oac == null)
                 return;

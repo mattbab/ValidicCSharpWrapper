@@ -74,6 +74,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\InfoMetersWin\Logging\Validic.Logging\Validic.Logging.csproj">
+      <Project>{21872986-2697-4296-bd31-63e5a4eff585}</Project>
+      <Name>Validic.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Validic.Core\Validic.Core.csproj">
       <Project>{66bb27ac-7269-4630-80db-bd4faf2295f8}</Project>
       <Name>Validic.Core</Name>

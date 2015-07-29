@@ -21,28 +21,12 @@ namespace Validic.Mobile.DemoApp.Views
             Children.Add(new ListViewDemoPage {Title = "Tobacco Cessation"});
             Children.Add(new ListViewDemoPage {Title = "Apps"});
 
-            CurrentPageChanged += async (s, e) => await UpdatePageAsync();
             Appearing += OnAppearing;
         }
 
-        private async void OnAppearing(object sender, EventArgs eventArgs)
+        private void OnAppearing(object sender, EventArgs eventArgs)
         {
             CurrentPage = Children[0];
-            // await Task.Delay(1000);
-            // await UpdatePageAsync();
-        }
-
-        private async Task UpdatePageAsync()
-        {
-            var title = CurrentPage.Title;
-            if (title.ToUpper() == "ME")
-            {
-                var model = BindingContext as MainViewModel;
-                if (model == null)
-                    return;
-
-                await model.SelectedMainRecord.GetOrganizationMeDataAsync();
-            }
         }
     }
 }
