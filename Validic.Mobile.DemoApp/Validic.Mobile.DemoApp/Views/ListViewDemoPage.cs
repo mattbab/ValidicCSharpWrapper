@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
+﻿using System.Diagnostics;
 using Validic.Core.AppLib.ViewModels;
 using Xamarin.Forms;
 
@@ -13,10 +8,9 @@ namespace Validic.Mobile.DemoApp.Views
     {
         private readonly ListView _listView;
 
-
         public ListViewDemoPage()
         {
-            Label header = new Label
+            var header = new Label
             {
                 Text = Title,
                 Font = Font.BoldSystemFontOfSize(50),
@@ -35,10 +29,10 @@ namespace Validic.Mobile.DemoApp.Views
             };
 
             // Accomodate iPhone status bar.
-            this.Padding = new Thickness(10, Device.OnPlatform(20, 0, 0), 10, 5);
+            Padding = new Thickness(10, Device.OnPlatform(20, 0, 0), 10, 5);
 
             // Build the page.
-            this.Content = new StackLayout
+            Content = new StackLayout
             {
                 Children =
                 {
@@ -48,10 +42,8 @@ namespace Validic.Mobile.DemoApp.Views
             };
         }
 
-
         private object LoadTemplate()
         {
-
             // Create views with bindings for displaying each property.
             var nameLabel = new Label();
             nameLabel.SetBinding(Label.TextProperty, new Binding("Me.Id", BindingMode.OneWay));
@@ -78,7 +70,7 @@ namespace Validic.Mobile.DemoApp.Views
                             Spacing = 0,
                             Children =
                             {
-                                nameLabel,
+                                nameLabel
                                 //birthdayLabel
                             }
                         }
@@ -86,7 +78,6 @@ namespace Validic.Mobile.DemoApp.Views
                 }
             };
         }
-
 
         protected override async void OnAppearing()
         {
@@ -107,7 +98,3 @@ namespace Validic.Mobile.DemoApp.Views
         }
     }
 }
-
-
-
-
