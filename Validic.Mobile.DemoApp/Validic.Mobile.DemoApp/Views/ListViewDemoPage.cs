@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections;
+using System.Diagnostics;
 using Validic.Core.AppLib.ViewModels;
 using Validic.Logging;
 using Xamarin.Forms;
@@ -8,14 +9,20 @@ namespace Validic.Mobile.DemoApp.Views
     public static class GridHelper
     {
 
-        public static void AddRow(this Grid grid, int col, int row, string path, string stringFormat = null)
+        public static void AddRow(this Grid grid, int row, string path, string stringFormat = null)
         {
             // grid.Children.Add(item, Col, Row);
-            grid.Children.Add(new Label { Text = path }, col, row);
-            grid.Children.Add(CreateLabel(path, stringFormat), col, row);
+            grid.Children.Add(new Label { Text = path, TextColor = Color.Olive}, 0, row);
+            grid.Children.Add(CreateLabel(path, stringFormat), 1, row);
         }
 
-        public static Label CreateLabel(string path, string stringFormat = null)
+        public static Label CreateLabel(string path)
+        {
+            var label = new Label();
+            label.SetBinding(Label.TextProperty, new Binding(path, BindingMode.OneWay));
+            return label;
+        }
+        public static Label CreateLabel(string path, string stringFormat)
         {
             var label = new Label();
             label.SetBinding(Label.TextProperty, new Binding(path, BindingMode.OneWay, null, null, stringFormat));
@@ -75,7 +82,7 @@ namespace Validic.Mobile.DemoApp.Views
         {
             _log.Debug("LoadTemplate");
             if (_lastTemplate == null)
-                CreateMeTemplate();
+                CreateMeView();
 
 
             return _lastTemplate;
@@ -94,53 +101,54 @@ namespace Validic.Mobile.DemoApp.Views
             {
                 case "ME":
                     await model.SelectedMainRecord.GetOrganizationMeDataAsync();
-                    CreateMeTemplate();
-                    _listView.RowHeight = 40;
-                    _listView.ItemsSource = model.SelectedMainRecord.MeData;
-                    _log.Debug("_listView.ItemsSource = model.SelectedMainRecord.MeData: Finish");
+                    Show(CreateMeView(), 40, model.SelectedMainRecord.MeData);
                     break;
 
                 case "FITNESS":
                     await model.SelectedMainRecord.GetOrganizationFitnessData();
-                    CreateFitnessTemplate();
-                    _listView.RowHeight = 300;
-                    _listView.ItemsSource = model.SelectedMainRecord.FitnessData;
-                    _log.Debug("_listView.ItemsSource = model.SelectedMainRecord.MeData: Finish");
+                    Show(CreateFitnessView(), 400, model.SelectedMainRecord.FitnessData);
+                    break;
+                case "BIOMETRICS":
+                    await model.SelectedMainRecord.GetOrganizationBiometrics();
+                    Show(CreateBiometricsView(), 900, model.SelectedMainRecord.Biometrics);
                     break;
             }
         }
 
+        private void Show(View view, int  rowHeight, IEnumerable itemSource)
+        {
+            _lastTemplate = new ViewCell { View = view };
+            _listView.RowHeight = rowHeight;
+            _listView.ItemsSource = itemSource;
+        }
 
-
-        private void CreateMeTemplate()
+        private View CreateMeView()
         {
             // Return an assembled ViewCell.
-            _lastTemplate = new ViewCell
-            {
 
-                View = new StackLayout
+            var view = new StackLayout
+            {
+                Padding = new Thickness(0, 5),
+                Orientation = StackOrientation.Horizontal,
+                Children =
                 {
-                    Padding = new Thickness(0, 5),
-                    Orientation = StackOrientation.Horizontal,
-                    Children =
+                    //boxView,
+                    new StackLayout
                     {
-                        //boxView,
-                        new StackLayout
+                        VerticalOptions = LayoutOptions.Center,
+                        Spacing = 0,
+                        Children =
                         {
-                            VerticalOptions = LayoutOptions.Center,
-                            Spacing = 0,
-                            Children =
-                            {
-                                GridHelper.CreateLabel("Me.Id")
-                                //birthdayLabel
-                            }
+                            GridHelper.CreateLabel("Me.Id")
+                            //birthdayLabel
                         }
                     }
                 }
             };
+            return view;
         }
 
-        private void CreateFitnessTemplate()
+        private View CreateFitnessView()
         {
             var grid = new Grid
             {
@@ -171,65 +179,114 @@ namespace Validic.Mobile.DemoApp.Views
             };
 
             // Mesasurment
-            // Mesasurment
-            grid.AddRow(0, 0, "Id");
-            grid.AddRow(0, 1, "Time", "{0:MM/dd/yyy hh:mm:ss tt}");
-            grid.AddRow(0, 2, "Timestamp", "{0:MM/dd/yyy hh:mm:ss tt}");
-            grid.AddRow(0, 3, "UtcOffset");
-            grid.AddRow(0, 4, "LastUpdated", "{0:MM/dd/yyy hh:mm:ss tt}");
-            grid.AddRow(0, 5, "Source");
-            grid.AddRow(0, 6, "SourceName");
-            grid.AddRow(0, 7, "Extras");
-            grid.AddRow(0, 8, "UserId");
-            // Fitness  0,
-            grid.AddRow(0, 9, "Type");
-            grid.AddRow(0, 10, "Intensity");
-            grid.AddRow(0, 11, "StartTime", "{0:MM/dd/yyy hh:mm:ss tt}");
-            grid.AddRow(0, 12, "Distance", "{0:0.##}");
-            grid.AddRow(0, 13, "Duration");
-            grid.AddRow(0, 14, "Calories", "{0:0.##}");
-
-
-
-            _lastTemplate = new ViewCell
-            {
-                View = grid
-            };
+            grid.AddRow( 0, "Id");
+            grid.AddRow( 1, "Time", "{0:MM/dd/yyy hh:mm:ss tt}");
+            grid.AddRow( 2, "Timestamp", "{0:MM/dd/yyy hh:mm:ss tt}");
+            grid.AddRow( 3, "UtcOffset");
+            grid.AddRow( 4, "LastUpdated", "{0:MM/dd/yyy hh:mm:ss tt}");
+            grid.AddRow( 5, "Source");
+            grid.AddRow( 6, "SourceName");
+            grid.AddRow( 7, "Extras");
+            grid.AddRow( 8, "UserId");
+            // Fitness  
+            grid.AddRow( 9, "Type");
+            grid.AddRow( 10, "Intensity");
+            grid.AddRow( 11, "StartTime", "{0:MM/dd/yyy hh:mm:ss tt}");
+            grid.AddRow( 12, "Distance", "{0:0.##}");
+            grid.AddRow( 13, "Duration");
+            grid.AddRow( 14, "Calories", "{0:0.##}");
+            return grid;  
         }
-        private void CreateCompactFitnessTemplate()
+
+        private View CreateBiometricsView()
         {
             var grid = new Grid
             {
                 Padding = new Thickness(5, 10, 0, 0),
                 ColumnDefinitions =
                 {
-                    new ColumnDefinition {Width = new GridLength(100, GridUnitType.Absolute)},
-                    new ColumnDefinition {Width = new GridLength(100, GridUnitType.Absolute)},
-                    new ColumnDefinition {Width = new GridLength(100, GridUnitType.Absolute)},
-                    new ColumnDefinition {Width = new GridLength(100, GridUnitType.Absolute)},
-                    new ColumnDefinition {Width = new GridLength(100, GridUnitType.Absolute)},
-                    new ColumnDefinition {Width = new GridLength(100, GridUnitType.Absolute)},
-                    new ColumnDefinition {Width = new GridLength(100, GridUnitType.Absolute)},
+                    new ColumnDefinition {Width = GridLength.Auto},
+                    new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)},
                 },
                 RowDefinitions =
                 {
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    //
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    //
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    //
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = GridLength.Auto},
                     new RowDefinition {Height = GridLength.Auto},
                 },
             };
 
             // Mesasurment
-            // Fitness  0,
-            grid.AddRow(0,0, "Type");
-            grid.AddRow(1,0, "Intensity");
-            grid.AddRow(2,0, "StartTime", "{0:MM/dd/yyy hh:mm:ss tt}");
-            grid.AddRow(3,0, "Distance", "{0:0.##}");
-            grid.AddRow(4,0, "Duration");
-            grid.AddRow(5,0, "Calories", "{0:0.##}");
+            grid.AddRow(0, "Id");
+            grid.AddRow(1, "Time", "{0:MM/dd/yyy hh:mm:ss tt}");
+            grid.AddRow(2, "Timestamp", "{0:MM/dd/yyy hh:mm:ss tt}");
+            grid.AddRow(3, "UtcOffset");
+            grid.AddRow(4, "LastUpdated", "{0:MM/dd/yyy hh:mm:ss tt}");
+            grid.AddRow(5, "Source");
+            grid.AddRow(6, "SourceName");
+            grid.AddRow(7, "Extras");
+            grid.AddRow(8, "UserId");
+            // Fitness  
+            grid.AddRow(9, "BloodCalcium"    );
+            grid.AddRow(10, "BloodChromium"   );
+            grid.AddRow(11, "BloodFolicAcid"  );
+            grid.AddRow(12, "BloodMagnesium"  );
+            grid.AddRow(13, "BloodPotassium"  );
+            grid.AddRow(14, "BloodSodium"     );
+            grid.AddRow(15, "BloodVitaminB12" );
+            grid.AddRow(16, "BloodZinc"       );
+            grid.AddRow(17, "CreatineKinase"  );
+            grid.AddRow(18, "Crp"             );
+            grid.AddRow(19, "Diastolic"       );
+            grid.AddRow(20, "Ferritin"        );
+            grid.AddRow(21, "Hdl"             );
+            grid.AddRow(22, "Hscrp"           );
+            grid.AddRow(23, "Il6"             );
+            grid.AddRow(24, "Ldl"             );
+            grid.AddRow(25, "RestingHeartrate");
+            grid.AddRow(26, "Systolic"        );
+            grid.AddRow(27, "Testosterone"    );
+            grid.AddRow(28, "TotalCholesterol");
+            grid.AddRow(29, "Tsh"             );
+            grid.AddRow(30, "UricAcid"        );
+            grid.AddRow(31, "VitaminD"        );
+            grid.AddRow(32, "WhiteCellCount"  );
 
-            _lastTemplate = new ViewCell
-            {
-                View = grid
-            };
+            return grid;
         }
     }
 }

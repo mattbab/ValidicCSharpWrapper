@@ -37,7 +37,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </ContentPage>
+        </ContentPage>  
         <ContentPage Title="Profile" />
         <ContentPage Title="Weight" />
         <ContentPage Title="Biometrics" />
