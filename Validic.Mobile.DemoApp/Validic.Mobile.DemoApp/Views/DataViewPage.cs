@@ -2,41 +2,18 @@
 using System.Diagnostics;
 using Validic.Core.AppLib.ViewModels;
 using Validic.Logging;
+using Validic.Mobile.DemoApp.Helpers;
 using Xamarin.Forms;
 
 namespace Validic.Mobile.DemoApp.Views
 {
-    public static class GridHelper
+    internal class DataViewPage : ContentPage
     {
-
-        public static void AddRow(this Grid grid, int row, string path, string stringFormat = null)
-        {
-            // grid.Children.Add(item, Col, Row);
-            grid.Children.Add(new Label { Text = path, TextColor = Color.Olive}, 0, row);
-            grid.Children.Add(CreateLabel(path, stringFormat), 1, row);
-        }
-
-        public static Label CreateLabel(string path)
-        {
-            var label = new Label();
-            label.SetBinding(Label.TextProperty, new Binding(path, BindingMode.OneWay));
-            return label;
-        }
-        public static Label CreateLabel(string path, string stringFormat)
-        {
-            var label = new Label();
-            label.SetBinding(Label.TextProperty, new Binding(path, BindingMode.OneWay, null, null, stringFormat));
-            return label;
-        }
-    }
-
-    internal class ListViewDemoPage : ContentPage
-    {
-        private readonly ILog _log = LogManager.GetLogger("ListViewDemoPage");
+        private readonly ILog _log = LogManager.GetLogger("DataViewPage");
 
         private ListView _listView;
 
-        public ListViewDemoPage()
+        public DataViewPage()
         {
             CreateListView();
         }
@@ -148,7 +125,7 @@ namespace Validic.Mobile.DemoApp.Views
             return view;
         }
 
-        private View CreateFitnessView()
+        private static View CreateFitnessView()
         {
             var grid = new Grid
             {

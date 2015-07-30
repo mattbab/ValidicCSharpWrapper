@@ -10,16 +10,16 @@ namespace Validic.Mobile.DemoApp.Views
         public MainRecordView2()
         {
             Title = "Static Tabs Sample 3";
-            Children.Add(new ListViewDemoPage {Title = "Me"});
-            Children.Add(new ListViewDemoPage {Title = "Profile"});
-            Children.Add(new ListViewDemoPage {Title = "Weight"});
-            Children.Add(new ListViewDemoPage {Title = "Biometrics"});
-            Children.Add(new ListViewDemoPage {Title = "Fitness"});
-            Children.Add(new ListViewDemoPage {Title = "Diabetes"});
-            Children.Add(new ListViewDemoPage {Title = "Routine"});
-            Children.Add(new ListViewDemoPage {Title = "Sleep"});
-            Children.Add(new ListViewDemoPage {Title = "Tobacco Cessation"});
-            Children.Add(new ListViewDemoPage {Title = "Apps"});
+            Children.Add(new DataViewPage {Title = "Me"});
+            Children.Add(new DataViewPage {Title = "Profile"});
+            Children.Add(new DataViewPage {Title = "Weight"});
+            Children.Add(new DataViewPage {Title = "Biometrics"});
+            Children.Add(new DataViewPage {Title = "Fitness"});
+            Children.Add(new DataViewPage {Title = "Diabetes"});
+            Children.Add(new DataViewPage {Title = "Routine"});
+            Children.Add(new DataViewPage {Title = "Sleep"});
+            Children.Add(new DataViewPage {Title = "Tobacco Cessation"});
+            Children.Add(new DataViewPage {Title = "Apps"});
 
             Appearing += OnAppearing;
         }
