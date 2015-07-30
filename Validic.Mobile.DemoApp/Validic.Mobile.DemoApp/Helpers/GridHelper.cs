@@ -21,6 +21,11 @@ namespace Validic.Mobile.DemoApp.Helpers
         public static Label CreateLabel(string path, string stringFormat)
         {
             var label = new Label();
+
+            // because "stringFormat" can be "" value, we need to replace it by null
+            if (string.IsNullOrEmpty(stringFormat))
+                stringFormat = null;
+
             label.SetBinding(Label.TextProperty, new Binding(path, BindingMode.OneWay, null, null, stringFormat));
             return label;
         }

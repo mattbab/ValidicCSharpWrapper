@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Validic.Core.AppLib.ViewModels;
 using Validic.Logging;
@@ -9,6 +10,12 @@ namespace Validic.Mobile.DemoApp.Views
 {
     internal class DataViewPage : ContentPage
     {
+        #region Constants
+
+
+        #endregion
+
+
         private readonly ILog _log = LogManager.GetLogger("DataViewPage");
 
         private ListView _listView;
@@ -80,14 +87,17 @@ namespace Validic.Mobile.DemoApp.Views
                     await model.SelectedMainRecord.GetOrganizationMeDataAsync();
                     Show(CreateMeView(), 40, model.SelectedMainRecord.MeData);
                     break;
-
+                case "PROFILE":
+                    await model.SelectedMainRecord.GetOrganizationProfiles();
+                    Show(CreateGenericDataView(BindingInfoLists.ProfileBindingList), 40, model.SelectedMainRecord.Profiles);
+                    break;
                 case "FITNESS":
                     await model.SelectedMainRecord.GetOrganizationFitnessData();
-                    Show(CreateFitnessView(), 400, model.SelectedMainRecord.FitnessData);
+                    Show(CreateDataView(BindingInfoLists.FitnessBindingList), 400, model.SelectedMainRecord.FitnessData);
                     break;
                 case "BIOMETRICS":
                     await model.SelectedMainRecord.GetOrganizationBiometrics();
-                    Show(CreateBiometricsView(), 900, model.SelectedMainRecord.Biometrics);
+                    Show(CreateDataView(BindingInfoLists.BiometricsBindingList), 900, model.SelectedMainRecord.Biometrics);
                     break;
             }
         }
@@ -125,145 +135,55 @@ namespace Validic.Mobile.DemoApp.Views
             return view;
         }
 
-        private static View CreateFitnessView()
-        {
-            var grid = new Grid
-            {
-                Padding = new Thickness(5, 10, 0, 0),
-                ColumnDefinitions =
-                {
-                    new ColumnDefinition {Width = new GridLength(100, GridUnitType.Absolute)},
-                    new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)},
-                },
-                RowDefinitions =
-                {
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                },
-            };
+        #region Stattic Functions
 
-            // Mesasurment
-            grid.AddRow( 0, "Id");
-            grid.AddRow( 1, "Time", "{0:MM/dd/yyy hh:mm:ss tt}");
-            grid.AddRow( 2, "Timestamp", "{0:MM/dd/yyy hh:mm:ss tt}");
-            grid.AddRow( 3, "UtcOffset");
-            grid.AddRow( 4, "LastUpdated", "{0:MM/dd/yyy hh:mm:ss tt}");
-            grid.AddRow( 5, "Source");
-            grid.AddRow( 6, "SourceName");
-            grid.AddRow( 7, "Extras");
-            grid.AddRow( 8, "UserId");
-            // Fitness  
-            grid.AddRow( 9, "Type");
-            grid.AddRow( 10, "Intensity");
-            grid.AddRow( 11, "StartTime", "{0:MM/dd/yyy hh:mm:ss tt}");
-            grid.AddRow( 12, "Distance", "{0:0.##}");
-            grid.AddRow( 13, "Duration");
-            grid.AddRow( 14, "Calories", "{0:0.##}");
-            return grid;  
+        private static View CreateDataView(Dictionary<string, string> bindingList)
+        {
+            return CreateDataView(BindingInfoLists.MesasurmentBindingList, bindingList);
         }
 
-        private View CreateBiometricsView()
+        private static View CreateDataView(Dictionary<string, string> bindingList1, Dictionary<string, string> bindingList2)
         {
+            var bindingList = new Dictionary<string, string>();
+
+            foreach (var item in bindingList1)
+                bindingList.Add(item.Key, item.Value);
+
+            foreach (var item in bindingList2)
+                bindingList.Add(item.Key, item.Value);
+
+            return CreateGenericDataView(bindingList);
+
+        }
+
+        private static View CreateGenericDataView(Dictionary<string,string> bindingList)
+        {
+            var rowDefinitions = new RowDefinitionCollection();
+            var colDefinitions = new ColumnDefinitionCollection()
+            {
+                new ColumnDefinition {Width = new GridLength(100, GridUnitType.Absolute)},
+                new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)},
+            };
+
+            // Add Rows
+            foreach (var item in bindingList)
+                rowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+
             var grid = new Grid
             {
                 Padding = new Thickness(5, 10, 0, 0),
-                ColumnDefinitions =
-                {
-                    new ColumnDefinition {Width = GridLength.Auto},
-                    new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)},
-                },
-                RowDefinitions =
-                {
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    //
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    //
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    //
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = GridLength.Auto},
-                },
+                ColumnDefinitions = colDefinitions,
+                RowDefinitions = rowDefinitions
             };
 
-            // Mesasurment
-            grid.AddRow(0, "Id");
-            grid.AddRow(1, "Time", "{0:MM/dd/yyy hh:mm:ss tt}");
-            grid.AddRow(2, "Timestamp", "{0:MM/dd/yyy hh:mm:ss tt}");
-            grid.AddRow(3, "UtcOffset");
-            grid.AddRow(4, "LastUpdated", "{0:MM/dd/yyy hh:mm:ss tt}");
-            grid.AddRow(5, "Source");
-            grid.AddRow(6, "SourceName");
-            grid.AddRow(7, "Extras");
-            grid.AddRow(8, "UserId");
-            // Fitness  
-            grid.AddRow(9, "BloodCalcium"    );
-            grid.AddRow(10, "BloodChromium"   );
-            grid.AddRow(11, "BloodFolicAcid"  );
-            grid.AddRow(12, "BloodMagnesium"  );
-            grid.AddRow(13, "BloodPotassium"  );
-            grid.AddRow(14, "BloodSodium"     );
-            grid.AddRow(15, "BloodVitaminB12" );
-            grid.AddRow(16, "BloodZinc"       );
-            grid.AddRow(17, "CreatineKinase"  );
-            grid.AddRow(18, "Crp"             );
-            grid.AddRow(19, "Diastolic"       );
-            grid.AddRow(20, "Ferritin"        );
-            grid.AddRow(21, "Hdl"             );
-            grid.AddRow(22, "Hscrp"           );
-            grid.AddRow(23, "Il6"             );
-            grid.AddRow(24, "Ldl"             );
-            grid.AddRow(25, "RestingHeartrate");
-            grid.AddRow(26, "Systolic"        );
-            grid.AddRow(27, "Testosterone"    );
-            grid.AddRow(28, "TotalCholesterol");
-            grid.AddRow(29, "Tsh"             );
-            grid.AddRow(30, "UricAcid"        );
-            grid.AddRow(31, "VitaminD"        );
-            grid.AddRow(32, "WhiteCellCount"  );
+            // Add Data
+            var row = 0;
+            foreach (var item in bindingList)
+                grid.AddRow(row++, item.Key, item.Value);
 
             return grid;
         }
+
+        #endregion
     }
 }
