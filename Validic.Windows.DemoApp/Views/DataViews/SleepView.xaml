@@ -25,13 +25,13 @@
                     <GridViewColumn Header="SourceName" Width="80" DisplayMemberBinding="{Binding SourceName}" />
                     <GridViewColumn Header="Extras" Width="70" DisplayMemberBinding="{Binding Extras}" />
                     <GridViewColumn Header="UserId" Width="170" DisplayMemberBinding="{Binding UserId}" />
-                    <!--Weight-->
-                    <GridViewColumn Header="Awake" Width="70" DisplayMemberBinding="{Binding Awake}" />
-                    <GridViewColumn Header="Deep" Width="70" DisplayMemberBinding="{Binding Deep}" />
-                    <GridViewColumn Header="Light" Width="70" DisplayMemberBinding="{Binding Light}" />
-                    <GridViewColumn Header="Rem" Width="70" DisplayMemberBinding="{Binding Rem}" />
-                    <GridViewColumn Header="TimesWoken" Width="70" DisplayMemberBinding="{Binding TimesWoken}" />
-                    <GridViewColumn Header="TotalSleep" Width="70" DisplayMemberBinding="{Binding TotalSleep}" />
+                    <!--Sleep-->
+                    <GridViewColumn Header="Awake" Width="70"       DisplayMemberBinding="{Binding Awake}" />
+                    <GridViewColumn Header="Deep" Width="70"        DisplayMemberBinding="{Binding Deep}" />
+                    <GridViewColumn Header="Light" Width="70"       DisplayMemberBinding="{Binding Light}" />
+                    <GridViewColumn Header="Rem" Width="70"         DisplayMemberBinding="{Binding Rem}" />
+                    <GridViewColumn Header="TimesWoken" Width="70"  DisplayMemberBinding="{Binding TimesWoken}" />
+                    <GridViewColumn Header="TotalSleep" Width="70"  DisplayMemberBinding="{Binding TotalSleep}" />
                 </GridView>
             </ListView.View>
         </ListView>

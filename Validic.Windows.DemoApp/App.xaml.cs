@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using Validic.Core;
 using Validic.Core.AppLib.ViewModels;
+using Validic.Logging;
 using Validic.Windows.DemoApp.Helpers;
 
 namespace Validic.Windows.DemoApp
@@ -16,8 +17,10 @@ namespace Validic.Windows.DemoApp
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            LogManager.GetLogger = (t) => new Logger(t);
             Client.EnableLogging = true;
             base.OnStartup(e);
+
             // Logger.Level = Level.Debug;
 
             // _viewModel.Dispatcher = ViewHelper.GetAddDelegate(_mainWindow);

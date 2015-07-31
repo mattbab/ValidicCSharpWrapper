@@ -26,12 +26,9 @@
                     <GridViewColumn Header="Extras" Width="70" DisplayMemberBinding="{Binding Extras}" />
                     <GridViewColumn Header="UserId" Width="170" DisplayMemberBinding="{Binding UserId}" />
                     <!--Weight-->
-                    <GridViewColumn Header="Steps" Width="70"
-                                    DisplayMemberBinding="{Binding Steps, StringFormat={}{0:0.##}}" />
-                    <GridViewColumn Header="CaloriesBurned" Width="70"
-                                    DisplayMemberBinding="{Binding CaloriesBurned, StringFormat={}{0:0.##}}" />
-                    <GridViewColumn Header="Distance" Width="70"
-                                    DisplayMemberBinding="{Binding Distance, StringFormat={}{0:0.##}}" />
+                    <GridViewColumn Header="Steps" Width="70" DisplayMemberBinding="{Binding Steps, StringFormat={}{0:0.##}}" />
+                    <GridViewColumn Header="CaloriesBurned" Width="70" DisplayMemberBinding="{Binding CaloriesBurned, StringFormat={}{0:0.##}}" />
+                    <GridViewColumn Header="Distance" Width="70" DisplayMemberBinding="{Binding Distance, StringFormat={}{0:0.##}}" />
                     <GridViewColumn Header="Floors" Width="70" DisplayMemberBinding="{Binding Floors}" />
                     <GridViewColumn Header="Elevation" Width="70" DisplayMemberBinding="{Binding Elevation}" />
                 </GridView>

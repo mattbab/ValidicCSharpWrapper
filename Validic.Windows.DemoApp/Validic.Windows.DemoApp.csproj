@@ -85,6 +85,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\BaseConverter.cs" />
+    <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Helpers\ViewHelper.cs" />
     <Compile Include="Views\DataViews\AppsView.xaml.cs">
       <DependentUpon>AppsView.xaml</DependentUpon>
@@ -240,6 +241,10 @@
     <Resource Include="Resources\Images\csharpwrapper.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\InfoMetersWin\Logging\Validic.Logging\Validic.Logging.csproj">
+      <Project>{21872986-2697-4296-bd31-63e5a4eff585}</Project>
+      <Name>Validic.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Validic.Core.AppLib\Validic.Core.AppLib.csproj">
       <Project>{69f3d34d-a870-4c09-b0a7-3d9d9d2204aa}</Project>
       <Name>Validic.Core.AppLib</Name>

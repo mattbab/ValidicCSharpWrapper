@@ -26,12 +26,10 @@
                     <GridViewColumn Header="Extras" Width="70" DisplayMemberBinding="{Binding Extras}" />
                     <GridViewColumn Header="UserId" Width="170" DisplayMemberBinding="{Binding UserId}" />
                     <!--Weight-->
-                    <GridViewColumn Header="CigarettesAllowed" Width="70"
-                                    DisplayMemberBinding="{Binding CigarettesAllowed}" />
-                    <GridViewColumn Header="CigarettesSmoked" Width="70"
-                                    DisplayMemberBinding="{Binding CigarettesSmoked}" />
-                    <GridViewColumn Header="Cravings" Width="70" DisplayMemberBinding="{Binding Cravings}" />
-                    <GridViewColumn Header="LastSmoked" Width="70" DisplayMemberBinding="{Binding LastSmoked}" />
+                    <GridViewColumn Header="CigarettesAllowed" Width="70" DisplayMemberBinding="{Binding CigarettesAllowed}" />
+                    <GridViewColumn Header="CigarettesSmoked" Width="70"  DisplayMemberBinding="{Binding CigarettesSmoked}" />
+                    <GridViewColumn Header="Cravings" Width="70"          DisplayMemberBinding="{Binding Cravings}" />
+                    <GridViewColumn Header="LastSmoked" Width="70"        DisplayMemberBinding="{Binding LastSmoked}" />
                 </GridView>
             </ListView.View>
         </ListView>

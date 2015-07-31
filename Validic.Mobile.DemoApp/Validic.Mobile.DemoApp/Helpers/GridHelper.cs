@@ -1,3 +1,5 @@
+using System;
+using System.Reflection;
 using Xamarin.Forms;
 
 namespace Validic.Mobile.DemoApp.Helpers

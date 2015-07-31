@@ -22,5 +22,6 @@ namespace Validic.Core.Model
 
         [JsonProperty("calories")]
         public double? Calories { get; set; }
+
     }
 }

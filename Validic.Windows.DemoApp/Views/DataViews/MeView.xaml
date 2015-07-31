@@ -32,8 +32,7 @@
                 </ListView.CommandBindings>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Number"
-                                        DisplayMemberBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}},Converter={StaticResource IndexConverter}}" />
+                        <GridViewColumn Header="Number" DisplayMemberBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}},Converter={StaticResource IndexConverter}}" />
                         <GridViewColumn Header="Me Id" Width="170" DisplayMemberBinding="{Binding Me.Id}" />
                         <GridViewColumn Header="Id" Width="170" DisplayMemberBinding="{Binding RefreshToken.Id}" />
                         <GridViewColumn Header="Uid" Width="170" DisplayMemberBinding="{Binding RefreshToken.Uid}" />

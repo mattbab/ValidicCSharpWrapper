@@ -85,19 +85,44 @@ namespace Validic.Mobile.DemoApp.Views
             {
                 case "ME":
                     await model.SelectedMainRecord.GetOrganizationMeDataAsync();
-                    Show(CreateMeView(), 40, model.SelectedMainRecord.MeData);
+                    Show(CreateGenericGridView(BindingInfoLists.MeBindingList), 40, model.SelectedMainRecord.MeData);
                     break;
                 case "PROFILE":
                     await model.SelectedMainRecord.GetOrganizationProfiles();
-                    Show(CreateGenericDataView(BindingInfoLists.ProfileBindingList), 40, model.SelectedMainRecord.Profiles);
+                    Show(CreateGenericGridView(BindingInfoLists.ProfileBindingList), 40, model.SelectedMainRecord.Profiles);
                     break;
-                case "FITNESS":
-                    await model.SelectedMainRecord.GetOrganizationFitnessData();
-                    Show(CreateDataView(BindingInfoLists.FitnessBindingList), 400, model.SelectedMainRecord.FitnessData);
+                case "WEIGHT":
+                    await model.SelectedMainRecord.GetOrganizationWeight();
+                    Show(CreateGridView(BindingInfoLists.WeightBindingList), 400, model.SelectedMainRecord.Weights);
                     break;
                 case "BIOMETRICS":
                     await model.SelectedMainRecord.GetOrganizationBiometrics();
-                    Show(CreateDataView(BindingInfoLists.BiometricsBindingList), 900, model.SelectedMainRecord.Biometrics);
+                    Show(CreateGridView(BindingInfoLists.BiometricsBindingList), 900, model.SelectedMainRecord.Biometrics);
+                    break;
+                case "FITNESS":
+                    await model.SelectedMainRecord.GetOrganizationFitnessData();
+                    Show(CreateGridView(BindingInfoLists.FitnessBindingList), 400, model.SelectedMainRecord.FitnessData);
+                    break;
+                case "DIABETES":
+                    await model.SelectedMainRecord.GetOrganizationDiabetesData();
+                    Show(CreateGridView(BindingInfoLists.DiabetesBindingList), 400, model.SelectedMainRecord.DiabetesData);
+                    break;
+
+                case "NUTRITION":
+                    await model.SelectedMainRecord.GetOrganizationNutritionData();
+                    Show(CreateGridView(BindingInfoLists.NutritionBindingList), 400, model.SelectedMainRecord.NutritionData);
+                    break;
+                case "ROUTINE":
+                    await model.SelectedMainRecord.GetOrganizationRoutineData();
+                    Show(CreateGridView(BindingInfoLists.RoutineBindingList), 400, model.SelectedMainRecord.RoutineData);
+                    break;
+                case "SLEEP":
+                    await model.SelectedMainRecord.GetOrganizationSleepData();
+                    Show(CreateGridView(BindingInfoLists.SleepBindingList), 400, model.SelectedMainRecord.SleepData);
+                    break;
+                case "TOBACCO CESSATION":
+                    await model.SelectedMainRecord.GetOrganizationTobaccoCessationData();
+                    Show(CreateGridView(BindingInfoLists.TobaccoCessationBindingList), 400, model.SelectedMainRecord.TobaccoCessationData);
                     break;
             }
         }
@@ -137,12 +162,12 @@ namespace Validic.Mobile.DemoApp.Views
 
         #region Stattic Functions
 
-        private static View CreateDataView(Dictionary<string, string> bindingList)
+        private static View CreateGridView(Dictionary<string, string> bindingList)
         {
-            return CreateDataView(BindingInfoLists.MesasurmentBindingList, bindingList);
+            return CreateGridView(BindingInfoLists.MesasurmentBindingList, bindingList);
         }
 
-        private static View CreateDataView(Dictionary<string, string> bindingList1, Dictionary<string, string> bindingList2)
+        private static Grid CreateGridView(Dictionary<string, string> bindingList1, Dictionary<string, string> bindingList2)
         {
             var bindingList = new Dictionary<string, string>();
 
@@ -152,11 +177,11 @@ namespace Validic.Mobile.DemoApp.Views
             foreach (var item in bindingList2)
                 bindingList.Add(item.Key, item.Value);
 
-            return CreateGenericDataView(bindingList);
+            return CreateGenericGridView(bindingList);
 
         }
 
-        private static View CreateGenericDataView(Dictionary<string,string> bindingList)
+        private static Grid CreateGenericGridView(Dictionary<string,string> bindingList)
         {
             var rowDefinitions = new RowDefinitionCollection();
             var colDefinitions = new ColumnDefinitionCollection()
