@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using System.Collections.Generic;
+using Validic.Mobile.DemoApp.PlacesCategories;
 
 namespace MasterDetail
 {
@@ -31,34 +32,28 @@ namespace MasterDetail
 				HeightRequest = 25
 			});
 					
-			header.Children.Add (new Label () {
-				Text = "places",
-				TextColor = Color.FromHex ("dddddd"),
-				VerticalOptions = LayoutOptions.CenterAndExpand
-			});
+			//header.Children.Add (new Label () {
+			//	Text = "places",
+			//	TextColor = Color.FromHex ("dddddd"),
+			//	VerticalOptions = LayoutOptions.CenterAndExpand
+			//});
 
 			layout.Children.Add (header);
 
-			var foodPlaces = new Label () {
-				Text = "Food",
-				TextColor = Color.FromHex ("dddddd")
-			};
-			foodPlaces.GestureRecognizers.Add (new TapGestureRecognizer ((view) => OnMenuTap(new FoodPlacesPage())));
-			layout.Children.Add (foodPlaces);
+		    Action<Page> add = (page) =>
+		    {
+		        var label = new Label()
+		        {
+		            Text = page.Title,
+		            TextColor = Color.FromHex("dddddd")
+		        };
+                label.GestureRecognizers.Add(new TapGestureRecognizer(view => OnMenuTap(page)));
+		        layout.Children.Add(label);
+		    };
 
-			var shoppingPlaces = new Label () {
-				Text = "Shopping",
-				TextColor = Color.FromHex ("dddddd")
-			};
-			shoppingPlaces.GestureRecognizers.Add (new TapGestureRecognizer ((view) => OnMenuTap(new ShoppingPlacesPage())));
-			layout.Children.Add (shoppingPlaces);
-
-			var learningPlaces = new Label () {
-				Text = "Learning",
-				TextColor = Color.FromHex ("dddddd")
-			};
-			learningPlaces.GestureRecognizers.Add (new TapGestureRecognizer ((view) => OnMenuTap(new LearningPlacesPage())));
-			layout.Children.Add (learningPlaces);
+		    add(new MainRecordView());
+            add(new ShoppingPlacesPage());
+            add(new LearningPlacesPage());
 
 			Content = layout;
 		}

@@ -15,60 +15,26 @@ namespace Validic.Mobile.DemoApp.Views
 
         #endregion
 
+        #region Members
 
         private readonly ILog _log = LogManager.GetLogger("DataViewPage");
-
         private ListView _listView;
+        private object _lastTemplate = null;
+
+        #endregion
 
         public DataViewPage()
         {
-            CreateListView();
-        }
-
-        public void CreateListView()
-        {
-            var header = new Label
-            {
-                Text = Title,
-                Font = Font.BoldSystemFontOfSize(50),
-                HorizontalOptions = LayoutOptions.Center
-            };
-
-
             // Define some data.
-            _listView = new ListView
-            {
-                // Source of data items.
-                // AK ItemsSource = people,
-                // Define template for displaying each item.
-                // (Argument of DataTemplate constructor is called for 
-                //      each item; it must return a Cell derivative.)
-                ItemTemplate = new DataTemplate(LoadTemplate)
-            };
-
-            // Accomodate iPhone status bar.
-            Padding = new Thickness(10, Device.OnPlatform(20, 0, 0), 10, 5);
+            _listView = new ListView { ItemTemplate = new DataTemplate(LoadTemplate) };
 
             // Build the page.
-            Content = new StackLayout
-            {
-                Children =
-                {
-                    header,
-                    _listView
-                }
-            };
+            Content = _listView;
         }
-
-        private object _lastTemplate = null;
 
         private object LoadTemplate()
         {
             _log.Debug("LoadTemplate");
-            if (_lastTemplate == null)
-                CreateMeView();
-
-
             return _lastTemplate;
         }
 
@@ -134,31 +100,6 @@ namespace Validic.Mobile.DemoApp.Views
             _listView.ItemsSource = itemSource;
         }
 
-        private View CreateMeView()
-        {
-            // Return an assembled ViewCell.
-
-            var view = new StackLayout
-            {
-                Padding = new Thickness(0, 5),
-                Orientation = StackOrientation.Horizontal,
-                Children =
-                {
-                    //boxView,
-                    new StackLayout
-                    {
-                        VerticalOptions = LayoutOptions.Center,
-                        Spacing = 0,
-                        Children =
-                        {
-                            GridHelper.CreateLabel("Me.Id")
-                            //birthdayLabel
-                        }
-                    }
-                }
-            };
-            return view;
-        }
 
         #region Stattic Functions
 

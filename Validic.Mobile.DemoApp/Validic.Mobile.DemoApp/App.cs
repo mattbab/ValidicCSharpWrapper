@@ -14,7 +14,7 @@ namespace Validic.Mobile.DemoApp
         {
             // The root page of your application
             // MainPage = new NavigationPage(new MainView());
-            MainPage = new AlabamaPlacesPage();
+            MainPage = new RootPage();
         }
 
         protected override void OnStart()
@@ -36,8 +36,8 @@ namespace Validic.Mobile.DemoApp
 
         private void LoadModel(MainViewModel model)
         {
-            var assembly = typeof (MainView).GetTypeInfo().Assembly;
-            var resourceNames = assembly.GetManifestResourceNames();
+            var assembly = typeof (App).GetTypeInfo().Assembly;
+            // var resourceNames = assembly.GetManifestResourceNames();
             var name = "Validic.Mobile.DemoApp.Resources.validic.json";
             var stream = assembly.GetManifestResourceStream(name);
             model.LoadModel(stream, true);

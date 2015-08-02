@@ -1,7 +1,6 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
-namespace MasterDetail
+namespace Validic.Mobile.DemoApp.PlacesCategories
 {
 	public class LearningPlacesPage : ContentPage
 	{

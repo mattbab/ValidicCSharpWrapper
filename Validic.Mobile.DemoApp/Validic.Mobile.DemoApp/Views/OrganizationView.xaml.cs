@@ -1,4 +1,5 @@
 ﻿using System;
+using Validic.Mobile.DemoApp.PlacesCategories;
 using Xamarin.Forms;
 
 namespace Validic.Mobile.DemoApp.Views
