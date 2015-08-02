@@ -1,9 +1,8 @@
 ﻿using System;
+using Validic.Mobile.DemoApp.Views;
 using Xamarin.Forms;
-using System.Collections.Generic;
-using Validic.Mobile.DemoApp.PlacesCategories;
 
-namespace MasterDetail
+namespace Validic.Mobile.DemoApp.Menu
 {
 	public class MenuPage : ContentPage
 	{		
@@ -52,9 +51,7 @@ namespace MasterDetail
 		    };
 
 		    add(new MainRecordView());
-            add(new ShoppingPlacesPage());
-            add(new LearningPlacesPage());
-
+            add(new OrganizationView());
 			Content = layout;
 		}
 	}

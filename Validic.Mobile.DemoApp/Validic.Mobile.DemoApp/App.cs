@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using MasterDetail;
 using Validic.Core.AppLib.ViewModels;
 using Validic.Mobile.DemoApp.Views;
 using Xamarin.Forms;

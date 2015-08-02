@@ -1,5 +1,5 @@
-﻿using MasterDetail;
-using Validic.Mobile.DemoApp.PlacesCategories;
+﻿using Validic.Mobile.DemoApp.Menu;
+using Validic.Mobile.DemoApp.Views;
 using Xamarin.Forms;
 
 namespace Validic.Mobile.DemoApp

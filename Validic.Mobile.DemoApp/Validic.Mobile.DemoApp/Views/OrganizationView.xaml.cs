@@ -1,5 +1,4 @@
 ﻿using System;
-using Validic.Mobile.DemoApp.PlacesCategories;
 using Xamarin.Forms;
 
 namespace Validic.Mobile.DemoApp.Views
@@ -9,6 +8,7 @@ namespace Validic.Mobile.DemoApp.Views
         public OrganizationView()
         {
             InitializeComponent();
+            Title = "Organizations";
         }
 
         private async void Button_OnClicked(object sender, EventArgs e)
