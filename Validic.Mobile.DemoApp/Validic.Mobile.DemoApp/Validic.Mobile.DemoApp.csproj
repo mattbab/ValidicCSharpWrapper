@@ -35,10 +35,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AlabamaPlacesPage.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Helpers\BindingInfoLists.cs" />
     <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Menu\MenuPage.cs" />
     <Compile Include="NonNullToBooleanConverter.cs" />
+    <Compile Include="PlacesCategories\FoodPlacesPage.cs" />
+    <Compile Include="PlacesCategories\LearningPlacesPage.cs" />
+    <Compile Include="PlacesCategories\ShoppingPlacesPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\GridHelper.cs" />
     <Compile Include="Helpers\BindInfo.cs" />

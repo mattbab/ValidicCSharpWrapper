@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using MasterDetail;
 using Validic.Core.AppLib.ViewModels;
 using Validic.Mobile.DemoApp.Views;
 using Xamarin.Forms;
@@ -12,7 +13,8 @@ namespace Validic.Mobile.DemoApp
         public App()
         {
             // The root page of your application
-            MainPage = new NavigationPage(new MainView());
+            // MainPage = new NavigationPage(new MainView());
+            MainPage = new AlabamaPlacesPage();
         }
 
         protected override void OnStart()

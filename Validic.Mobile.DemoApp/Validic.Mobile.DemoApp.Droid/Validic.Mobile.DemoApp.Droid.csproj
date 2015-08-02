@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
+    <AndroidResource Include="Resources\drawable\masterIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\InfoMetersWin\Logging\Validic.Logging.Android\Validic.Logging.Android.csproj">
