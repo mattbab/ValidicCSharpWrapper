@@ -15,60 +15,6 @@ namespace Validic.Core.AppLib.ViewModels
     {
         private readonly ILog _log = LogManager.GetLogger("ListViewDemoPage");
 
-        #region Constructor
-
-        public MainRecordModelView()
-        {
-            MeData = new ObservableCollection<MeViewModel>();
-
-            CommandGetOrganization = new RelayCommand(async () => await GetOrganization(), () => true);
-            CommandClearOrganization = new RelayCommand(ClearOrganization, () => true);
-            CommandGetOrganizationWeight = new RelayCommand(async () => await GetOrganizationWeight(), () => true);
-            CommandGetOrganizationBiometrics = new RelayCommand(async () => await GetOrganizationBiometrics(), () => true);
-            CommandGetOrganizationFitnessData = new RelayCommand(async () => await GetOrganizationFitnessData(), () => true);
-            CommandGetOrganizationDiabetesData = new RelayCommand(async () => await GetOrganizationDiabetesData(), () => true);
-            CommandGetOrganizationNutritionData = new RelayCommand(async () => await GetOrganizationNutritionData(), () => true);
-            CommandGetOrganizationRoutineData = new RelayCommand(async () => await GetOrganizationRoutineData(), () => true);
-            CommandGetOrganizationSleepData = new RelayCommand(async () => await GetOrganizationSleepData(), () => true);
-            CommandGetOrganizationTobaccoCessationData = new RelayCommand(async () => await GetOrganizationTobaccoCessationData(), () => true);
-            CommandGetOrganizationProfiles = new RelayCommand(async () => await GetOrganizationProfiles(), () => true);
-            CommandGetOrganizationMeData = new RelayCommand(async () => await GetOrganizationMeDataAsync(), () => true);
-            CommandGetOrganizationApps = new RelayCommand(async () => await GetOrganizationApps(), () => true);
-            // 
-            CommandDataSelected = new RelayCommand(DataSelected, () => true);
-            CommandMeUpdate = new RelayCommand(async () => await MeUpdateAsync(), () => true);
-            CommandMeUpdateAll = new RelayCommand(MeUpdateAll, () => true);
-        }
-
-        #endregion
-
-        private void DataSelected()
-        {
-        }
-
-        private async Task<string> GetOrganizationJsonData(CommandType commandType)
-        {
-            var oac = OrganizationAuthenticationCredential;
-            if (oac == null)
-                return null;
-
-            var client = new Client {AccessToken = oac.AccessToken};
-            var command = new Command().FromOrganization(oac.OrganizationId)
-                .GetInformationType(commandType);
-            // .GetLatest();
-
-            var json = await client.PerformCommandAsync(command);
-            return json;
-        }
-
-        private async Task<ValidicResult<List<T>>> GetOrganizationData<T>(CommandType commandType)
-        {
-            var json = await GetOrganizationJsonData(commandType);
-
-            var result = json?.ToResult<List<T>>();
-            return result;
-        }
-
         #region Members
 
         private Organization _organization;
@@ -157,6 +103,33 @@ namespace Validic.Core.AppLib.ViewModels
 
         #endregion
 
+        #region Constructor
+
+        public MainRecordModelView()
+        {
+            MeData = new ObservableCollection<MeViewModel>();
+
+            CommandGetOrganization = new RelayCommand(async () => await GetOrganization(), () => true);
+            CommandClearOrganization = new RelayCommand(ClearOrganization, () => true);
+            CommandGetOrganizationWeight = new RelayCommand(async () => await GetOrganizationWeight(), () => true);
+            CommandGetOrganizationBiometrics = new RelayCommand(async () => await GetOrganizationBiometrics(), () => true);
+            CommandGetOrganizationFitnessData = new RelayCommand(async () => await GetOrganizationFitnessData(), () => true);
+            CommandGetOrganizationDiabetesData = new RelayCommand(async () => await GetOrganizationDiabetesData(), () => true);
+            CommandGetOrganizationNutritionData = new RelayCommand(async () => await GetOrganizationNutritionData(), () => true);
+            CommandGetOrganizationRoutineData = new RelayCommand(async () => await GetOrganizationRoutineData(), () => true);
+            CommandGetOrganizationSleepData = new RelayCommand(async () => await GetOrganizationSleepData(), () => true);
+            CommandGetOrganizationTobaccoCessationData = new RelayCommand(async () => await GetOrganizationTobaccoCessationData(), () => true);
+            CommandGetOrganizationProfiles = new RelayCommand(async () => await GetOrganizationProfiles(), () => true);
+            CommandGetOrganizationMeData = new RelayCommand(async () => await GetOrganizationMeDataAsync(), () => true);
+            CommandGetOrganizationApps = new RelayCommand(async () => await GetOrganizationApps(), () => true);
+            // 
+            CommandDataSelected = new RelayCommand(DataSelected, () => true);
+            CommandMeUpdate = new RelayCommand(async () => await MeUpdateAsync(), () => true);
+            CommandMeUpdateAll = new RelayCommand(MeUpdateAll, () => true);
+        }
+
+        #endregion
+
         #region  Commands Implemenation
 
         public async Task GetOrganizationMeDataAsync()
@@ -166,13 +139,13 @@ namespace Validic.Core.AppLib.ViewModels
             if (oac == null)
                 return;
 
-            var client = new Client {AccessToken = oac.AccessToken};
+            var client = new Client { AccessToken = oac.AccessToken };
             var result = await client.GetEnterpriseUsersAsync(oac.OrganizationId);
             if (result?.Object == null)
                 return;
 
             foreach (var me in result.Object)
-                MeData.Add(new MeViewModel {Me = me, RefreshToken = new RefreshToken()});
+                MeData.Add(new MeViewModel { Me = me, RefreshToken = new RefreshToken() });
 
             RaisePropertyChanged("MeData");
         }
@@ -258,7 +231,7 @@ namespace Validic.Core.AppLib.ViewModels
             if (oac == null)
                 return;
 
-            var client = new Client {AccessToken = oac.AccessToken};
+            var client = new Client { AccessToken = oac.AccessToken };
             var command = new Command().FromOrganization(oac.OrganizationId);
 
             var json = await client.PerformCommandAsync(command);
@@ -297,7 +270,7 @@ namespace Validic.Core.AppLib.ViewModels
                 if (oac == null)
                     return;
 
-                var client = new Client {AccessToken = oac.AccessToken};
+                var client = new Client { AccessToken = oac.AccessToken };
                 var result = await client.GetUserRefreshTokenAsync(record.Me.Id, oac.OrganizationId);
                 record.RefreshToken = result.Object;
             }
@@ -322,5 +295,33 @@ namespace Validic.Core.AppLib.ViewModels
         }
 
         #endregion
+
+        private void DataSelected()
+        {
+        }
+
+        private async Task<string> GetOrganizationJsonData(CommandType commandType)
+        {
+            var oac = OrganizationAuthenticationCredential;
+            if (oac == null)
+                return null;
+
+            var client = new Client {AccessToken = oac.AccessToken};
+            var command = new Command().FromOrganization(oac.OrganizationId)
+                .GetInformationType(commandType);
+            // .GetLatest();
+
+            var json = await client.PerformCommandAsync(command);
+            return json;
+        }
+
+        private async Task<ValidicResult<List<T>>> GetOrganizationData<T>(CommandType commandType)
+        {
+            var json = await GetOrganizationJsonData(commandType);
+
+            var result = json?.ToResult<List<T>>();
+            return result;
+        }
+
     }
 }

@@ -51,7 +51,7 @@ namespace Validic.Mobile.DemoApp.Menu
 		    };
 
 		    add(new MainRecordView());
-            add(new OrganizationView());
+            add(new OrganizationListView());
 			Content = layout;
 		}
 	}

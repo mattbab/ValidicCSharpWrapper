@@ -16,7 +16,7 @@ namespace Validic.Mobile.DemoApp
 
 			Master = menuPage;
 			Detail = new NavigationPage(new MainRecordView ());
-		}
-	}
+        }
+    }
 }
 

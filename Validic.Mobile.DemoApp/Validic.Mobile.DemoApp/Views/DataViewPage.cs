@@ -95,10 +95,12 @@ namespace Validic.Mobile.DemoApp.Views
 
         private void Show(View view, int  rowHeight, IEnumerable itemSource)
         {
-            _lastTemplate = new ViewCell { View = view };
+            var viewCell = new ViewCell { View = view };
+            _lastTemplate = viewCell;
             _listView.RowHeight = rowHeight;
             _listView.ItemsSource = itemSource;
         }
+
 
 
         #region Stattic Functions
