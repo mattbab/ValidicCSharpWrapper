@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace Validic.Mobile.DemoApp.Views
 {
-    public class MainRecordView2 : TabbedPage
+    public class MainRecordView : TabbedPage
     {
-        public MainRecordView2()
+        public MainRecordView()
         {
             Title = "Static Tabs Sample 3";
             Children.Add(new DataViewPage {Title = "Me"});
