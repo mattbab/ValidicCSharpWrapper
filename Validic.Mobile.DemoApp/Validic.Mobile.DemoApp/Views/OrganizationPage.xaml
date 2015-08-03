@@ -4,8 +4,8 @@
              x:Class="Validic.Mobile.DemoApp.Views.OrganizationPage">
   <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
   <ContentPage.ToolbarItems>
-    <ToolbarItem Text="OK"></ToolbarItem>
-    <ToolbarItem Text="Cancel"></ToolbarItem>
+    <ToolbarItem x:Name="ToolbarItemOk" Text="OK"></ToolbarItem>
+    <ToolbarItem x:Name="ToolbarItemCancel" Text="Cancel"></ToolbarItem>
   </ContentPage.ToolbarItems>
   <Grid>
     <Grid.ColumnDefinitions>

@@ -32,18 +32,19 @@ namespace Validic.Mobile.DemoApp.Views
         private void ModifyOrganization()
         {
             _log.Debug("ModifyOrganization");
-            Navigation.PushModalAsync(new OrganizationPage());
+            Navigation.PushAsync(new OrganizationPage());
         }
 
         private void DeleteOrganization()
         {
             _log.Debug("DeleteOrganization");
+            Navigation.PushAsync(new OrganizationPage());
         }
 
         private void AddOrganization()
         {
             _log.Debug("AddOrganization");
-            Navigation.PushModalAsync(new OrganizationPage());
+            Navigation.PushAsync(new OrganizationPage());
         }
 
         private void ListViewOganizationsOnItemSelected(object sender, SelectedItemChangedEventArgs args)

@@ -140,8 +140,12 @@ namespace Validic.Core.AppLib.ViewModels
         {
             get
             {
+#if FIX_COMMAND_MANAGER
                 var enable = !MainRecords.IsNullOrEmpty() && SelectedMainRecord != null;
                 return enable;
+#else
+                return true;
+#endif
             }
         }
 
@@ -149,8 +153,14 @@ namespace Validic.Core.AppLib.ViewModels
         {
             get
             {
+
+#if FIX_COMMAND_MANAGER
                 var enable = !MainRecords.IsNullOrEmpty() && SelectedMainRecord != null;
                 return enable;
+#else
+                return true;
+#endif
+
             }
         }
 
