@@ -7,23 +7,23 @@
     <ToolbarItem x:Name="ToolbarItemOk" Text="OK"></ToolbarItem>
     <ToolbarItem x:Name="ToolbarItemCancel" Text="Cancel"></ToolbarItem>
   </ContentPage.ToolbarItems>
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="5"></ColumnDefinition>
-      <ColumnDefinition Width="100"></ColumnDefinition>
-      <ColumnDefinition Width="5"></ColumnDefinition>
-      <ColumnDefinition Width="*"></ColumnDefinition>
-      <ColumnDefinition Width="5"></ColumnDefinition>
-    </Grid.ColumnDefinitions>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="5" />
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="5" />
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="*" />
-      <RowDefinition Height="5" />
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="5" />
-    </Grid.RowDefinitions>
-  </Grid>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="5"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="1" Grid.Column="1" Text="ID"/>
+        <Editor Grid.Row="2" Grid.Column="1" Text="{Binding OrganizationId }" />
+        <Label Grid.Row="3" Grid.Column="1" Text="Token"/>
+        <Editor x:Name="EditorToken" Grid.Row="4" Grid.Column="1" Text="{Binding AccessToken}"/>
+    </Grid>
 </ContentPage>

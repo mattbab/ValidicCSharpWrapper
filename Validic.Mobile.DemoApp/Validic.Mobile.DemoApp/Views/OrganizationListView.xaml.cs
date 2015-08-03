@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Dynamic;
+using System.Threading.Tasks;
 using Validic.Core.AppLib.ViewModels;
+using Validic.Core.Model;
 using Validic.Logging;
 using Xamarin.Forms;
 
@@ -16,7 +18,7 @@ namespace Validic.Mobile.DemoApp.Views
             ListViewOganizations.ItemTapped += ListViewOganizationsOnItemTapped;
             ListViewOganizations.ItemSelected += ListViewOganizationsOnItemSelected;
             this.BindingContextChanged += OnBindingContextChanged;
-        }
+         }
 
         private void OnBindingContextChanged(object sender, EventArgs eventArgs)
         {
@@ -24,27 +26,53 @@ namespace Validic.Mobile.DemoApp.Views
             if (model == null)
                 return;
 
-            model.AddOrganization += AddOrganization;
-            model.DeleteOrganization += DeleteOrganization;
-            model.ModifyOrganization += ModifyOrganization;
+            model.AddOrganization += async () => await AddOrganization();
+            model.DeleteOrganization += async () => await DeleteOrganization();
+            model.ModifyOrganization += async () => await ModifyOrganization();
         }
 
-        private void ModifyOrganization()
+        private async Task ModifyOrganization()
         {
-            _log.Debug("ModifyOrganization");
-            Navigation.PushAsync(new OrganizationPage());
+            try
+            {
+                _log.Debug("ModifyOrganization");
+                var model = BindingContext as MainViewModel;
+                if (model == null)
+                    return;
+
+                var selectedMainRecord = model.SelectedMainRecord;
+                var currentCredential = selectedMainRecord.OrganizationAuthenticationCredential;
+                var newCredential = new OrganizationAuthenticationCredentials
+                {
+                    OrganizationId = currentCredential.OrganizationId,
+                    AccessToken = currentCredential.AccessToken
+                };
+
+                var page = new OrganizationPage();
+                page.BindingContext = newCredential;
+                page.ClickedOk += () =>
+                {
+                    selectedMainRecord.OrganizationAuthenticationCredential = newCredential;
+                };
+                page.ClickedCancel += () => { };
+                await Navigation.PushAsync(page);
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.Message);
+            }
         }
 
-        private void DeleteOrganization()
+        private async Task DeleteOrganization()
         {
             _log.Debug("DeleteOrganization");
-            Navigation.PushAsync(new OrganizationPage());
+            await Navigation.PushAsync(new OrganizationPage());
         }
 
-        private void AddOrganization()
+        private async Task AddOrganization()
         {
             _log.Debug("AddOrganization");
-            Navigation.PushAsync(new OrganizationPage());
+            await Navigation.PushAsync(new OrganizationPage());
         }
 
         private void ListViewOganizationsOnItemSelected(object sender, SelectedItemChangedEventArgs args)

@@ -21,11 +21,24 @@ namespace Validic.Core.AppLib.ViewModels
         private MeViewModel _selectedMeRecord;
         private object _selectedData;
 
+        private OrganizationAuthenticationCredentials _organizationAuthenticationCredentials
+            ;
         #endregion
 
         #region Properties
 
-        public OrganizationAuthenticationCredentials OrganizationAuthenticationCredential { get; set; }
+        public OrganizationAuthenticationCredentials OrganizationAuthenticationCredential
+        {
+            get { return _organizationAuthenticationCredentials; }
+            set
+            {
+                if (_organizationAuthenticationCredentials == value)
+                    return;
+
+                _organizationAuthenticationCredentials = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public Organization Organization
         {
