@@ -22,7 +22,7 @@ namespace Validic.Mobile.DemoApp.Views
 
         private void OnBindingContextChanged(object sender, EventArgs eventArgs)
         {
-            var model = BindingContext as Main;
+            var model = BindingContext as MainViewModel;
             if (model == null)
                 return;
 
@@ -36,7 +36,7 @@ namespace Validic.Mobile.DemoApp.Views
             try
             {
                 _log.Debug("ModifyOrganization");
-                var model = BindingContext as Main;
+                var model = BindingContext as MainViewModel;
                 if (model == null)
                     return;
 

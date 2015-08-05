@@ -17,7 +17,7 @@ namespace Validic.Windows.DemoApp
             InitializeComponent();
         }
 
-        public void Start(Main model)
+        public void Start(MainViewModel model)
         {
             model.PropertyChanged += (s, a) =>
             {
@@ -37,12 +37,12 @@ namespace Validic.Windows.DemoApp
             LoadModel(model);
         }
 
-        public void Stop(Main model)
+        public void Stop(MainViewModel model)
         {
             SaveSettings(model);
         }
 
-        private void LoadModel(Main model)
+        private void LoadModel(MainViewModel model)
         {
             // string[] resourceNames = Assembly.GetExecutingAssembly().GetManifestResourceNames(); 
             var assembly = typeof (MainWindow).GetTypeInfo().Assembly;
@@ -51,7 +51,7 @@ namespace Validic.Windows.DemoApp
             model.LoadModel(stream, true);
         }
 
-        private void LoadSettings(Main model)
+        private void LoadSettings(MainViewModel model)
         {
             var s = Settings.Default;
             // Load Window State
@@ -62,7 +62,7 @@ namespace Validic.Windows.DemoApp
             Height = s.WindowHeight;
         }
 
-        private void SaveSettings(Main model)
+        private void SaveSettings(MainViewModel model)
         {
             var s = Settings.Default;
             // Save Settings

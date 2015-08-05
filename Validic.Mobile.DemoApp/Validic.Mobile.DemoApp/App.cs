@@ -7,7 +7,7 @@ namespace Validic.Mobile.DemoApp
 {
     public class App : Application
     {
-        private readonly Main _viewModel = new Main();
+        private readonly MainViewModel _viewModel = new MainViewModel();
 
         public App()
         {
@@ -33,7 +33,7 @@ namespace Validic.Mobile.DemoApp
             // Handle when your app resumes
         }
 
-        private void LoadModel(Main model)
+        private void LoadModel(MainViewModel model)
         {
             var assembly = typeof (App).GetTypeInfo().Assembly;
             // var resourceNames = assembly.GetManifestResourceNames();
