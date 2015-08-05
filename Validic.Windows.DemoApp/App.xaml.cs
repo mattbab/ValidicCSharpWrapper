@@ -13,7 +13,7 @@ namespace Validic.Windows.DemoApp
     {
         // private static readonly ILog Log = LogManager.GetLogger(typeof(App));
         private readonly MainWindow _mainWindow = new MainWindow();
-        private readonly MainViewModel _viewModel = new MainViewModel();
+        private readonly Main _viewModel = new Main();
 
         protected override void OnStartup(StartupEventArgs e)
         {

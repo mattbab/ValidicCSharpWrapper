@@ -12,7 +12,7 @@ using Validic.Mobile.DemoApp.Helpers;
 
 namespace Validic.Core.AppLib.ViewModels
 {
-    public class MainViewModel : BaseViewModel
+    public class Main : DispatcherViewModelBase
     {
         private readonly ILog _log = LogManager.GetLogger("ListViewDemoPage");
 
@@ -91,7 +91,7 @@ namespace Validic.Core.AppLib.ViewModels
 
         #region Constructor
 
-        public MainViewModel()
+        public Main()
         {
             Client.AddLine += AddLine;
             PropertyChanged += async (s, e) => await OnPropertyChanged(s, e);

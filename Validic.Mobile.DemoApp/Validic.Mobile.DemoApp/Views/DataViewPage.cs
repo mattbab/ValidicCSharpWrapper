@@ -42,7 +42,7 @@ namespace Validic.Mobile.DemoApp.Views
         {
             base.OnAppearing();
             _log.Debug("[OnAppearing] : Title = {0}", Title);
-            var model = BindingContext as MainViewModel;
+            var model = BindingContext as Main;
             if (model == null)
                 return;
 

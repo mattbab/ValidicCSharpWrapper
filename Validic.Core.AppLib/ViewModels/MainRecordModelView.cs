@@ -11,7 +11,7 @@ using Validic.Logging;
 
 namespace Validic.Core.AppLib.ViewModels
 {
-    public class MainRecordModelView : BaseViewModel
+    public class MainRecordModelView : DispatcherViewModelBase
     {
         private readonly ILog _log = LogManager.GetLogger("ListViewDemoPage");
 

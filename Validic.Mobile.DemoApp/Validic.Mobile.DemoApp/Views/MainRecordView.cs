@@ -24,7 +24,7 @@ namespace Validic.Mobile.DemoApp.Views
         protected override void OnAppearing()
 	    {
 	        base.OnAppearing();
-            var model = BindingContext as MainViewModel;
+            var model = BindingContext as Main;
             if(model == null)
                 return;
 

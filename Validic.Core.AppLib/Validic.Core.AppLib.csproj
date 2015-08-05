@@ -42,9 +42,9 @@
     <Compile Include="Helpers\StreamHelper.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\DispatcherViewModelBase.cs" />
     <Compile Include="ViewModels\MainRecordModelView.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\Main.cs" />
     <Compile Include="ViewModels\MeViewModel.cs" />
     <Compile Include="ViewModels\OrganizationViewModel.cs" />
   </ItemGroup>
