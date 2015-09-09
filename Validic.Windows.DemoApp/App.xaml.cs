@@ -15,9 +15,13 @@ namespace Validic.Windows.DemoApp
         private readonly MainWindow _mainWindow = new MainWindow();
         private readonly MainViewModel _viewModel = new MainViewModel();
 
-        protected override void OnStartup(StartupEventArgs e)
+        static App()
         {
             LogManager.GetLogger = (t) => new Logger(t);
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
             Client.EnableLogging = true;
             base.OnStartup(e);
 
