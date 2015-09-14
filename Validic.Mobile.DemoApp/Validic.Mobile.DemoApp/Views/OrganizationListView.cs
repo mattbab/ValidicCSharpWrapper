@@ -63,13 +63,13 @@ namespace Validic.Mobile.DemoApp.Views
 
             // Button "Delete"
             var buttonDelete = new Button {Text = "Delete"};
-            buttonAdd.SetBinding(Button.CommandProperty, "CommandDeleteOrganization");
-            buttonAdd.SetBinding(Button.IsEnabledProperty, "CanDeleteOrganization");
+            buttonDelete.SetBinding(Button.CommandProperty, "CommandDeleteOrganization");
+            buttonDelete.SetBinding(Button.IsEnabledProperty, "CanDeleteOrganization");
 
             // Button "Modify"
             var buttonModify = new Button {Text = "Modify"};
-            buttonAdd.SetBinding(Button.CommandProperty, "CommandModifyOrganization");
-            buttonAdd.SetBinding(Button.IsEnabledProperty, "CanModifyOrganization");
+            buttonModify.SetBinding(Button.CommandProperty, "CommandModifyOrganization");
+            buttonModify.SetBinding(Button.IsEnabledProperty, "CanModifyOrganization");
 
             gridButtons.Children.Add(buttonAdd, 0, 0);
             gridButtons.Children.Add(buttonDelete, 1, 0);
