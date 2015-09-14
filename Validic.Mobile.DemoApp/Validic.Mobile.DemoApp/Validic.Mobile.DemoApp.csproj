@@ -44,9 +44,7 @@
     <Compile Include="Helpers\GridHelper.cs" />
     <Compile Include="Views\DataViewPage.cs" />
     <Compile Include="Views\OrganizationListView.cs" />
-    <Compile Include="Views\OrganizationPage.xaml.cs">
-      <DependentUpon>OrganizationPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Views\OrganizationPage.cs" />
     <Compile Include="Views\RootPage.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -100,12 +98,6 @@
       <Project>{66bb27ac-7269-4630-80db-bd4faf2295f8}</Project>
       <Name>Validic.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\OrganizationPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
