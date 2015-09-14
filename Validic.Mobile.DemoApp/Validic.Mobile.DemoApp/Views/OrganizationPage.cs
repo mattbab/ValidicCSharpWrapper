@@ -36,10 +36,10 @@ namespace Validic.Mobile.DemoApp.Views
                 {
                     new RowDefinition {Height = new GridLength(5, GridUnitType.Absolute)},
                     new RowDefinition {Height = GridLength.Auto},
-                    new RowDefinition {Height = new GridLength(1, GridUnitType.Star)},
+                    new RowDefinition {Height = new GridLength(100, GridUnitType.Absolute)},
                     new RowDefinition {Height = GridLength.Auto},
+                    new RowDefinition {Height = new GridLength(100, GridUnitType.Absolute)},
                     new RowDefinition {Height = new GridLength(1, GridUnitType.Star)},
-                    new RowDefinition {Height = new GridLength(5, GridUnitType.Absolute)},
                 }
             };
 

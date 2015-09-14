@@ -139,13 +139,51 @@ namespace Validic.Mobile.DemoApp.Views
         private async Task DeleteOrganization()
         {
             _log.Debug("DeleteOrganization");
-            await Navigation.PushAsync(new OrganizationPage());
+            var model = BindingContext as MainViewModel;
+            if (model == null)
+                return;
+
+            var page = new OrganizationPage();
+            var selectedRecord = model.SelectedMainRecord;
+            page.BindingContext = selectedRecord.OrganizationAuthenticationCredential;
+            page.ClickedOk += () =>
+            {
+                try
+                {
+                    model.MainRecords.Remove(selectedRecord);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex.Message);
+                }
+            };
+            await Navigation.PushAsync(page);
         }
 
         private async Task AddOrganization()
         {
             _log.Debug("AddOrganization");
-            await Navigation.PushAsync(new OrganizationPage());
+            var model = BindingContext as MainViewModel;
+            if (model == null)
+                return;
+
+            var page = new OrganizationPage();
+            var newCredential = new OrganizationAuthenticationCredentials();
+            page.BindingContext = newCredential;
+            page.ClickedOk += () =>
+            {
+                var record = new MainRecordModelView {OrganizationAuthenticationCredential = newCredential };
+                try
+                {
+                    model.MainRecords.Add(record);
+                    model.SelectedMainRecord = record;
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex.Message);
+                }
+            };
+            await Navigation.PushAsync(page);
         }
 
         private void ListViewOganizationsOnItemSelected(object sender, SelectedItemChangedEventArgs args)

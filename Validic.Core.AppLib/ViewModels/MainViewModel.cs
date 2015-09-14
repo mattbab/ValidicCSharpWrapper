@@ -54,7 +54,7 @@ namespace Validic.Core.AppLib.ViewModels
 
         public ObservableCollection<LogItem> LogItems { get; } = new ObservableCollection<LogItem>();
 
-        public List<MainRecordModelView> MainRecords { get; } = new List<MainRecordModelView>();
+        public ObservableCollection<MainRecordModelView> MainRecords { get; } = new ObservableCollection<MainRecordModelView>();
 
         public MainRecordModelView SelectedMainRecord
         {
