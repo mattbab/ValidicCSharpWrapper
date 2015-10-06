@@ -26,6 +26,8 @@ namespace Validic.Mobile.DemoApp.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::PCLStorage.Resource.String.ApplicationName = global::Validic.Mobile.DemoApp.Droid.Resource.String.ApplicationName;
+			global::PCLStorage.Resource.String.Hello = global::Validic.Mobile.DemoApp.Droid.Resource.String.Hello;
 			global::Validic.Logging.Android.Resource.String.ApplicationName = global::Validic.Mobile.DemoApp.Droid.Resource.String.ApplicationName;
 			global::Validic.Logging.Android.Resource.String.Hello = global::Validic.Mobile.DemoApp.Droid.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Resource.String.ApplicationName = global::Validic.Mobile.DemoApp.Droid.Resource.String.ApplicationName;

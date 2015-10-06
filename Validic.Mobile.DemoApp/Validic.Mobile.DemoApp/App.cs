@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
+using System.Threading.Tasks;
 using Validic.Core.AppLib.ViewModels;
+using Validic.Mobile.DemoApp.Helpers;
 using Validic.Mobile.DemoApp.Views;
 using Xamarin.Forms;
 
@@ -21,6 +23,7 @@ namespace Validic.Mobile.DemoApp
             LoadModel(_viewModel);
             BindingContext = _viewModel;
             // Handle when your app starts
+            Task.Run(async () => await Test());
         }
 
         protected override void OnSleep()
@@ -40,6 +43,16 @@ namespace Validic.Mobile.DemoApp
             var name = "Validic.Mobile.DemoApp.Resources.validic.json";
             var stream = assembly.GetManifestResourceStream(name);
             model.LoadModel(stream, true);
+        }
+
+        private async Task Test()
+        {
+            var folderName = "Data";
+            var fileName = "validic.json";
+            var text1 = "Hello!";
+            await StorageHelper.WriteFileAsync(folderName, fileName, text1);
+            var text2 = await StorageHelper.ReadFileAsync(folderName, fileName);
+            var equal = text1.Equals(text2);
         }
     }
 }
