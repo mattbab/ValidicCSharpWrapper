@@ -48,7 +48,7 @@ namespace Validic.Windows.DemoApp
             var assembly = typeof (MainWindow).GetTypeInfo().Assembly;
             var name = "Validic.Windows.DemoApp.Resources.validic.json";
             var stream = assembly.GetManifestResourceStream(name);
-            model.LoadModel(stream, true);
+            model.LoadModel(stream);
         }
 
         private void LoadSettings(MainViewModel model)

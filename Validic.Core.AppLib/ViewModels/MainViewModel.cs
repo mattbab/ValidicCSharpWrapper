@@ -179,33 +179,40 @@ namespace Validic.Core.AppLib.ViewModels
             }
         }
 
-        public void LoadModel(Stream s, bool exist)
+        public void LoadModel(Stream s)
         {
-            OpenOrCreateModel(s, exist);
+            Model = StreamHelper.ReadFromFile<MainModel>(s);
+            if (Model == null)
+            {
+                Model = new MainModel();
+                Model.Populate();
+            }
+
+            MainRecords.Clear();
             foreach (var organizationAuthenticationCredential in Model.OrganizationAuthenticationCredentials)
             {
                 var record = new MainRecordModelView { OrganizationAuthenticationCredential = organizationAuthenticationCredential };
                 MainRecords.Add(record);
             }
+
             SelectedMainRecord = MainRecords[0];
-            // SaveToFile("validic.json", Model);
         }
+
+        public void SaveModel(Stream s)
+        {
+            Model.OrganizationAuthenticationCredentials.Clear();
+            foreach (var mainRecord in MainRecords)
+            {
+                var credential = mainRecord.OrganizationAuthenticationCredential;
+                Model.OrganizationAuthenticationCredentials.Add(credential);
+            }
+            StreamHelper.SaveToFile(s, Model);
+        }
+
 
         #region Support Functions
 
 
-        private void OpenOrCreateModel(Stream s, bool exist)
-        {
-            Model = new MainModel();
-            // read JSON directly from a file
-            if (!exist)
-            {
-                Model.Populate();
-                Helpers.StreamHelper.SaveToFile(s, Model);
-            }
-
-            Model = Helpers.StreamHelper.ReadFromFile<MainModel>(s);
-        }
 
         #endregion
 

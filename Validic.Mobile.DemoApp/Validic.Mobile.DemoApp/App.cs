@@ -1,5 +1,10 @@
-﻿using System.Reflection;
+﻿using System.IO;
+using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
+using PCLStorage;
+using Validic.Core.AppLib.Helpers;
+using Validic.Core.AppLib.Models;
 using Validic.Core.AppLib.ViewModels;
 using Validic.Mobile.DemoApp.Helpers;
 using Validic.Mobile.DemoApp.Views;
@@ -18,17 +23,15 @@ namespace Validic.Mobile.DemoApp
             MainPage = new RootPage();
         }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
-            LoadModel(_viewModel);
+            await Load(_viewModel);
             BindingContext = _viewModel;
-            // Handle when your app starts
-            Task.Run(async () => await Test());
         }
 
-        protected override void OnSleep()
+        protected override async void OnSleep()
         {
-            // Handle when your app sleeps
+            await Save(_viewModel);
         }
 
         protected override void OnResume()
@@ -36,23 +39,28 @@ namespace Validic.Mobile.DemoApp
             // Handle when your app resumes
         }
 
-        private void LoadModel(MainViewModel model)
-        {
-            var assembly = typeof (App).GetTypeInfo().Assembly;
-            // var resourceNames = assembly.GetManifestResourceNames();
-            var name = "Validic.Mobile.DemoApp.Resources.validic.json";
-            var stream = assembly.GetManifestResourceStream(name);
-            model.LoadModel(stream, true);
-        }
 
-        private async Task Test()
+        string folderName = "Data";
+        string fileName = "validic.json";
+
+        private async Task Test1()
         {
-            var folderName = "Data";
-            var fileName = "validic.json";
             var text1 = "Hello!";
             await StorageHelper.WriteFileAsync(folderName, fileName, text1);
             var text2 = await StorageHelper.ReadFileAsync(folderName, fileName);
             var equal = text1.Equals(text2);
+        }
+
+        private async Task Load(MainViewModel viewModel)
+        {
+            var stream = await StorageHelper.GetFileStreamAsync(folderName, fileName);
+            viewModel.LoadModel(stream);
+        }
+
+        private async Task Save(MainViewModel viewModel)
+        {
+            var stream = await StorageHelper.GetFileStreamAsync(folderName, fileName);
+            viewModel.SaveModel(stream);
         }
     }
 }
