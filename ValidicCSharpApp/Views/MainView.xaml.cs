@@ -1,7 +1,7 @@
-﻿using System.Windows.Controls;
-
-namespace ValidicCSharpApp.Views
+﻿namespace ValidicCSharpApp.Views
 {
+    using System.Windows.Controls;
+
     /// <summary>
     ///     Interaction logic for MainView.xaml
     /// </summary>
@@ -9,7 +9,7 @@ namespace ValidicCSharpApp.Views
     {
         public MainView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

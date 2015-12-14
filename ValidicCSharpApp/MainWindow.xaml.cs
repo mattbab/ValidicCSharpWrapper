@@ -1,9 +1,10 @@
-﻿using System.Windows;
-using ValidicCSharpApp.Properties;
-using ValidicCSharpApp.ViewModels;
-
-namespace ValidicCSharpApp
+﻿namespace ValidicCSharpApp
 {
+    using System.Windows;
+
+    using ValidicCSharpApp.Properties;
+    using ValidicCSharpApp.ViewModels;
+
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
@@ -11,28 +12,28 @@ namespace ValidicCSharpApp
     {
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         public void Start(MainViewModel model)
         {
-            LoadSettings(model);
+            this.LoadSettings(model);
         }
 
         public void Stop(MainViewModel model)
         {
-            SaveSettings(model);
+            this.SaveSettings(model);
         }
 
         private void LoadSettings(MainViewModel model)
         {
             var s = Settings.Default;
             // Load Window State
-            WindowState = s.WindowState;
-            Top = s.WindowTop;
-            Left = s.WindowLeft;
-            Width = s.WindowWidth;
-            Height = s.WindowHeight;
+            this.WindowState = s.WindowState;
+            this.Top = s.WindowTop;
+            this.Left = s.WindowLeft;
+            this.Width = s.WindowWidth;
+            this.Height = s.WindowHeight;
         }
 
         private void SaveSettings(MainViewModel model)
@@ -41,11 +42,11 @@ namespace ValidicCSharpApp
             // Save Settings
 
             // Save Window State
-            s.WindowState = WindowState;
-            s.WindowTop = Top;
-            s.WindowLeft = Left;
-            s.WindowWidth = Width;
-            s.WindowHeight = Height;
+            s.WindowState = this.WindowState;
+            s.WindowTop = this.Top;
+            s.WindowLeft = this.Left;
+            s.WindowWidth = this.Width;
+            s.WindowHeight = this.Height;
             s.Save();
         }
     }

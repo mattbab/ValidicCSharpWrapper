@@ -1,46 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using GalaSoft.MvvmLight;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using ValidicCSharp;
-using ValidicCSharpApp.Models;
-
-namespace ValidicCSharpApp.ViewModels
+﻿namespace ValidicCSharpApp.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
+    using ValidicCSharp;
+
+    using ValidicCSharpApp.Models;
+
     public class MainViewModel : BaseViewModel
     {
         #region Ccnstructor
 
         public MainViewModel()
         {
-            Client.AddLine += AddLine;
-            OpenOrCreateModel();
-            foreach (var organizationAuthenticationCredential in Model.OrganizationAuthenticationCredentials)
+            Client.AddLine += this.AddLine;
+            this.OpenOrCreateModel();
+            foreach (var organizationAuthenticationCredential in this.Model.OrganizationAuthenticationCredentials)
             {
                 var record = new MainRecordModelView();
                 record.OrganizationAuthenticationCredential = organizationAuthenticationCredential;
-                MainRecords.Add(record);
+                this.MainRecords.Add(record);
             }
-            SelectedMainRecord = MainRecords[0];
+            this.SelectedMainRecord = this.MainRecords[0];
             // SaveToFile("validic.json", Model);
         }
-
 
         #endregion
 
         private void AddLine(LogItem a)
         {
-            _logItems.Add(a);
-            SelectedLogItemIndex = _logItems.Count;
+            this._logItems.Add(a);
+            this.SelectedLogItemIndex = this._logItems.Count;
         }
 
         #region Members
 
         private readonly List<MainRecordModelView> _mainRecords = new List<MainRecordModelView>();
+
         private readonly ObservableCollection<LogItem> _logItems = new ObservableCollection<LogItem>();
+
         private int _selectedLogItemIndex;
 
         #endregion
@@ -51,11 +54,14 @@ namespace ValidicCSharpApp.ViewModels
 
         public override Action<Action> Dispatcher
         {
-            get { return base.Dispatcher; }
+            get
+            {
+                return base.Dispatcher;
+            }
             set
             {
                 base.Dispatcher = value;
-                foreach (var record in MainRecords)
+                foreach (var record in this.MainRecords)
                 {
                     record.Dispatcher = value;
                 }
@@ -64,43 +70,60 @@ namespace ValidicCSharpApp.ViewModels
 
         public int SelectedLogItemIndex
         {
-            get { return _selectedLogItemIndex; }
+            get
+            {
+                return this._selectedLogItemIndex;
+            }
             set
             {
-                if (_selectedLogItemIndex == value)
+                if (this._selectedLogItemIndex == value)
+                {
                     return;
+                }
 
-                _selectedLogItemIndex = value;
-                RaisePropertyChanged("SelectedLogItemIndex");
+                this._selectedLogItemIndex = value;
+                this.RaisePropertyChanged("SelectedLogItemIndex");
             }
         }
-
 
         private MainRecordModelView _selectedMainRecord;
 
         public ObservableCollection<LogItem> LogItems
         {
-            get { return _logItems; }
+            get
+            {
+                return this._logItems;
+            }
         }
 
         public List<MainRecordModelView> MainRecords
         {
-            get { return _mainRecords; }
+            get
+            {
+                return this._mainRecords;
+            }
         }
 
         public MainRecordModelView SelectedMainRecord
         {
-            get { return _selectedMainRecord; }
+            get
+            {
+                return this._selectedMainRecord;
+            }
             set
             {
-                if (_selectedMainRecord == value)
+                if (this._selectedMainRecord == value)
+                {
                     return;
+                }
 
-                _selectedMainRecord = value;
-                if (_selectedMainRecord.Organization == null)
-                    _selectedMainRecord.GetOrganization();
+                this._selectedMainRecord = value;
+                if (this._selectedMainRecord.Organization == null)
+                {
+                    this._selectedMainRecord.GetOrganization();
+                }
 
-                RaisePropertyChanged();
+                this.RaisePropertyChanged();
             }
         }
 
@@ -126,7 +149,7 @@ namespace ValidicCSharpApp.ViewModels
             using (var file = File.OpenText(path))
             using (var reader = new JsonTextReader(file))
             {
-                var o2 = (JObject) JToken.ReadFrom(reader);
+                var o2 = (JObject)JToken.ReadFrom(reader);
                 return o2.ToObject<T>();
             }
         }
@@ -134,15 +157,15 @@ namespace ValidicCSharpApp.ViewModels
         private void OpenOrCreateModel()
         {
             var path = "validic.json";
-            Model = new MainModel();
+            this.Model = new MainModel();
             // read JSON directly from a file
             if (!File.Exists(path))
             {
-                Model.Populate();
-                SaveToFile(path, Model);
+                this.Model.Populate();
+                SaveToFile(path, this.Model);
             }
 
-            Model = ReadFromFile<MainModel>("validic.json");
+            this.Model = ReadFromFile<MainModel>("validic.json");
         }
 
         #endregion

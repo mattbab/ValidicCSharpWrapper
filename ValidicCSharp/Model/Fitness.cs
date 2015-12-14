@@ -1,8 +1,9 @@
-﻿using System;
-using Newtonsoft.Json;
-
-namespace ValidicCSharp.Model
+﻿namespace ValidicCSharp.Model
 {
+    using System;
+
+    using Newtonsoft.Json;
+
     public class Fitness : Measurement
     {
         [JsonProperty("type")]

@@ -1,13 +1,13 @@
-using ValidicCSharp.Interfaces;
-
 namespace ValidicCSharp.Request
 {
+    using ValidicCSharp.Interfaces;
+
     public class ToDateFilter : ValueFilter
     {
         public ToDateFilter()
         {
-            Type = FilterType.ToDate;
-            Label = "end_date";
+            this.Type = FilterType.ToDate;
+            this.Label = "end_date";
         }
     }
 }

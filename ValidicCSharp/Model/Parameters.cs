@@ -1,10 +1,11 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.Serialization;
-using ValidicCSharp.Interfaces;
-
-namespace ValidicCSharp.Model
+﻿namespace ValidicCSharp.Model
 {
+    using System;
+    using System.ComponentModel;
+    using System.Runtime.Serialization;
+
+    using ValidicCSharp.Interfaces;
+
     public class Parameters : IValidic
     {
         [DataMember(Name = "start_date")]

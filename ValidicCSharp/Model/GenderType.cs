@@ -1,11 +1,13 @@
-﻿using Newtonsoft.Json;
-
-namespace ValidicCSharp.Model
+﻿namespace ValidicCSharp.Model
 {
+    using Newtonsoft.Json;
+
     public enum GenderType
     {
-        [JsonProperty("M")] M = 0,
+        [JsonProperty("M")]
+        M = 0,
 
-        [JsonProperty("F")] F
+        [JsonProperty("F")]
+        F
     }
 }

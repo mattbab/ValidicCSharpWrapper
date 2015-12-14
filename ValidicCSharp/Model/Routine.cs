@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-
-namespace ValidicCSharp.Model
+﻿namespace ValidicCSharp.Model
 {
+    using Newtonsoft.Json;
+
     public class Routine : Measurement
     {
         [JsonProperty("steps")]

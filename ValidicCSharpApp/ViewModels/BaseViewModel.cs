@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GalaSoft.MvvmLight;
-
-namespace ValidicCSharpApp.ViewModels
+﻿namespace ValidicCSharpApp.ViewModels
 {
+    using System;
+
+    using GalaSoft.MvvmLight;
+
     public class BaseViewModel : ViewModelBase
     {
         public virtual Action<Action> Dispatcher { get; set; }

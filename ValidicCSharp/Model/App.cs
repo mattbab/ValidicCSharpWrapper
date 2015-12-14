@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using ValidicCSharp.Utility;
-
-namespace ValidicCSharp.Model
+﻿namespace ValidicCSharp.Model
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Newtonsoft.Json;
+
+    using ValidicCSharp.Utility;
+
     /// <summary>
     ///     <example>
     ///         "name": "BodyMedia",
@@ -49,7 +51,6 @@ namespace ValidicCSharp.Model
         // [JsonProperty("platform_types")]public string PlatformType { get; set; }
         // [JsonProperty("synced"        )]public string Synced       { get; set; }
         // [JsonProperty("last_sync"     )]public string LastSync     { get; set; }
-
 
         [JsonProperty("name")]
         public string Name { get; set; }

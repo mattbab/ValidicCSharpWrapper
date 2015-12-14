@@ -1,10 +1,12 @@
-﻿using System;
-using Newtonsoft.Json;
-using ValidicCSharp.Interfaces;
-using ValidicCSharp.Utility;
-
-namespace ValidicCSharp.Model
+﻿namespace ValidicCSharp.Model
 {
+    using System;
+
+    using Newtonsoft.Json;
+
+    using ValidicCSharp.Interfaces;
+    using ValidicCSharp.Utility;
+
     public class Me : IValidic
     {
         [JsonProperty("_id")]
