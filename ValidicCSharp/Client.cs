@@ -313,6 +313,22 @@ namespace ValidicCSharp
 
         #region Enterprise User Data
 
+        public AddUserResponse ProvisionUser(string userId, string orgId)
+        {
+            var client = new Client { AccessToken = this.AccessToken };
+            var command = new Command()
+                .AddUser(new AddUserRequest
+                {
+                    access_token = client.AccessToken,
+                    user = new UserRequest { Uid = userId },
+                })
+                .ToOrganization(orgId);
+
+            var json = client.PerformCommand(command);
+            var response = json.Objectify<AddUserResponse>();
+            return response;
+        }
+
         public List<App> GetEnterpriseUserApplications(string userId, string orgId, List<ICommandFilter> filters = null)
         {
             var command = new Command()
