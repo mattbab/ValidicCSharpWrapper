@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Threading;
-
-namespace ValidicCSharpApp.Helpers
+﻿namespace ValidicCSharpApp.Helpers
 {
+    using System;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+    using System.Windows.Threading;
+
     public class ViewHelper
     {
         public static void CopyCommandOnCanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -20,7 +20,9 @@ namespace ValidicCSharpApp.Helpers
         {
             var lb = e.OriginalSource as ListBox;
             if (lb == null)
+            {
                 return;
+            }
 
             var copyContent = new StringBuilder();
 
@@ -34,11 +36,11 @@ namespace ValidicCSharpApp.Helpers
             Clipboard.SetText(copyContent.ToString());
         }
 
-        public static Action<Action> GetAddDelegate(FrameworkElement fe,
+        public static Action<Action> GetAddDelegate(
+            FrameworkElement fe,
             DispatcherPriority priority = DispatcherPriority.Background)
         {
             return a => fe.Dispatcher.BeginInvoke(priority, a);
         }
-
     }
 }

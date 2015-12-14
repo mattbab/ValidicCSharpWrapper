@@ -1,10 +1,11 @@
-﻿using System.Diagnostics;
-using System.Windows.Controls;
-using System.Windows.Navigation;
-using ValidicCSharp;
-
-namespace ValidicCSharpApp.Views
+﻿namespace ValidicCSharpApp.Views
 {
+    using System.Diagnostics;
+    using System.Windows.Controls;
+    using System.Windows.Navigation;
+
+    using ValidicCSharp;
+
     /// <summary>
     ///     Interaction logic for LogView.xaml
     /// </summary>
@@ -12,21 +13,25 @@ namespace ValidicCSharpApp.Views
     {
         public LogView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void List_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var lv = sender as ListView;
             if (lv == null)
+            {
                 return;
+            }
 
             var logItem = lv.SelectedItem as LogItem;
             if (logItem == null)
+            {
                 return;
+            }
 
-            rtbMsgBox.Document.Blocks.Clear();
-            rtbMsgBox.AppendText(logItem.Json);
+            this.rtbMsgBox.Document.Blocks.Clear();
+            this.rtbMsgBox.AppendText(logItem.Json);
         }
 
         private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)

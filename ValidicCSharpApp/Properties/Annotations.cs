@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-
+﻿
 #pragma warning disable 1591
 // ReSharper disable UnusedMember.Global
 // ReSharper disable MemberCanBePrivate.Global
@@ -11,6 +9,9 @@ using System.Diagnostics;
 
 namespace ValidicCSharpApp.Annotations
 {
+    using System;
+    using System.Diagnostics;
+
     /// <summary>
     ///     Indicates that the value of the marked element could be <c>null</c> sometimes,
     ///     so the check for <c>null</c> is necessary before its usage
@@ -25,8 +26,8 @@ namespace ValidicCSharpApp.Annotations
     /// </code>
     /// </example>
     [AttributeUsage(
-        AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
-        AttributeTargets.Delegate | AttributeTargets.Field | AttributeTargets.Event)]
+        AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Delegate
+        | AttributeTargets.Field | AttributeTargets.Event)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     public sealed class CanBeNullAttribute : Attribute
     {
@@ -43,8 +44,8 @@ namespace ValidicCSharpApp.Annotations
     /// </code>
     /// </example>
     [AttributeUsage(
-        AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
-        AttributeTargets.Delegate | AttributeTargets.Field | AttributeTargets.Event)]
+        AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Delegate
+        | AttributeTargets.Field | AttributeTargets.Event)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     public sealed class NotNullAttribute : Attribute
     {
@@ -54,8 +55,8 @@ namespace ValidicCSharpApp.Annotations
     ///     Indicates that collection or enumerable value does not contain null elements
     /// </summary>
     [AttributeUsage(
-        AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
-        AttributeTargets.Delegate | AttributeTargets.Field)]
+        AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Delegate
+        | AttributeTargets.Field)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     public sealed class ItemNotNullAttribute : Attribute
     {
@@ -65,8 +66,8 @@ namespace ValidicCSharpApp.Annotations
     ///     Indicates that collection or enumerable value can contain null elements
     /// </summary>
     [AttributeUsage(
-        AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
-        AttributeTargets.Delegate | AttributeTargets.Field)]
+        AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Delegate
+        | AttributeTargets.Field)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     public sealed class ItemCanBeNullAttribute : Attribute
     {
@@ -86,8 +87,7 @@ namespace ValidicCSharpApp.Annotations
     /// }
     /// </code>
     /// </example>
-    [AttributeUsage(
-        AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Delegate)]
+    [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Delegate)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     public sealed class StringFormatMethodAttribute : Attribute
     {
@@ -96,7 +96,7 @@ namespace ValidicCSharpApp.Annotations
         /// </param>
         public StringFormatMethodAttribute(string formatParameterName)
         {
-            FormatParameterName = formatParameterName;
+            this.FormatParameterName = formatParameterName;
         }
 
         public string FormatParameterName { get; private set; }
@@ -112,7 +112,7 @@ namespace ValidicCSharpApp.Annotations
     {
         public ValueProviderAttribute(string name)
         {
-            Name = name;
+            this.Name = name;
         }
 
         [NotNull]
@@ -203,7 +203,7 @@ namespace ValidicCSharpApp.Annotations
 
         public NotifyPropertyChangedInvocatorAttribute(string parameterName)
         {
-            ParameterName = parameterName;
+            this.ParameterName = parameterName;
         }
 
         public string ParameterName { get; private set; }
@@ -275,11 +275,12 @@ namespace ValidicCSharpApp.Annotations
 
         public ContractAnnotationAttribute([NotNull] string contract, bool forceFullStates)
         {
-            Contract = contract;
-            ForceFullStates = forceFullStates;
+            this.Contract = contract;
+            this.ForceFullStates = forceFullStates;
         }
 
         public string Contract { get; private set; }
+
         public bool ForceFullStates { get; private set; }
     }
 
@@ -298,13 +299,14 @@ namespace ValidicCSharpApp.Annotations
     [Conditional("JETBRAINS_ANNOTATIONS")]
     public sealed class LocalizationRequiredAttribute : Attribute
     {
-        public LocalizationRequiredAttribute() : this(true)
+        public LocalizationRequiredAttribute()
+            : this(true)
         {
         }
 
         public LocalizationRequiredAttribute(bool required)
         {
-            Required = required;
+            this.Required = required;
         }
 
         public bool Required { get; private set; }
@@ -331,8 +333,7 @@ namespace ValidicCSharpApp.Annotations
     /// }
     /// </code>
     /// </example>
-    [AttributeUsage(
-        AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Struct)]
+    [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Struct)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     public sealed class CannotApplyEqualityOperatorAttribute : Attribute
     {
@@ -351,13 +352,13 @@ namespace ValidicCSharpApp.Annotations
     /// </code>
     /// </example>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    [BaseTypeRequired(typeof (Attribute))]
+    [BaseTypeRequired(typeof(Attribute))]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     public sealed class BaseTypeRequiredAttribute : Attribute
     {
         public BaseTypeRequiredAttribute([NotNull] Type baseType)
         {
-            BaseType = baseType;
+            this.BaseType = baseType;
         }
 
         [NotNull]
@@ -388,14 +389,14 @@ namespace ValidicCSharpApp.Annotations
         {
         }
 
-        public UsedImplicitlyAttribute(
-            ImplicitUseKindFlags useKindFlags, ImplicitUseTargetFlags targetFlags)
+        public UsedImplicitlyAttribute(ImplicitUseKindFlags useKindFlags, ImplicitUseTargetFlags targetFlags)
         {
-            UseKindFlags = useKindFlags;
-            TargetFlags = targetFlags;
+            this.UseKindFlags = useKindFlags;
+            this.TargetFlags = targetFlags;
         }
 
         public ImplicitUseKindFlags UseKindFlags { get; private set; }
+
         public ImplicitUseTargetFlags TargetFlags { get; private set; }
     }
 
@@ -423,11 +424,10 @@ namespace ValidicCSharpApp.Annotations
         {
         }
 
-        public MeansImplicitUseAttribute(
-            ImplicitUseKindFlags useKindFlags, ImplicitUseTargetFlags targetFlags)
+        public MeansImplicitUseAttribute(ImplicitUseKindFlags useKindFlags, ImplicitUseTargetFlags targetFlags)
         {
-            UseKindFlags = useKindFlags;
-            TargetFlags = targetFlags;
+            this.UseKindFlags = useKindFlags;
+            this.TargetFlags = targetFlags;
         }
 
         [UsedImplicitly]
@@ -466,6 +466,7 @@ namespace ValidicCSharpApp.Annotations
     public enum ImplicitUseTargetFlags
     {
         Default = Itself,
+
         Itself = 1,
 
         /// <summary>Members of entity marked with attribute are considered used</summary>
@@ -489,7 +490,7 @@ namespace ValidicCSharpApp.Annotations
 
         public PublicAPIAttribute([NotNull] string comment)
         {
-            Comment = comment;
+            this.Comment = comment;
         }
 
         public string Comment { get; private set; }
@@ -541,7 +542,7 @@ namespace ValidicCSharpApp.Annotations
 
         public PathReferenceAttribute([PathReference] string basePath)
         {
-            BasePath = basePath;
+            this.BasePath = basePath;
         }
 
         public string BasePath { get; private set; }
@@ -553,7 +554,7 @@ namespace ValidicCSharpApp.Annotations
     {
         public AspMvcAreaMasterLocationFormatAttribute(string format)
         {
-            Format = format;
+            this.Format = format;
         }
 
         public string Format { get; private set; }
@@ -565,7 +566,7 @@ namespace ValidicCSharpApp.Annotations
     {
         public AspMvcAreaPartialViewLocationFormatAttribute(string format)
         {
-            Format = format;
+            this.Format = format;
         }
 
         public string Format { get; private set; }
@@ -577,7 +578,7 @@ namespace ValidicCSharpApp.Annotations
     {
         public AspMvcAreaViewLocationFormatAttribute(string format)
         {
-            Format = format;
+            this.Format = format;
         }
 
         public string Format { get; private set; }
@@ -589,7 +590,7 @@ namespace ValidicCSharpApp.Annotations
     {
         public AspMvcMasterLocationFormatAttribute(string format)
         {
-            Format = format;
+            this.Format = format;
         }
 
         public string Format { get; private set; }
@@ -601,7 +602,7 @@ namespace ValidicCSharpApp.Annotations
     {
         public AspMvcPartialViewLocationFormatAttribute(string format)
         {
-            Format = format;
+            this.Format = format;
         }
 
         public string Format { get; private set; }
@@ -613,7 +614,7 @@ namespace ValidicCSharpApp.Annotations
     {
         public AspMvcViewLocationFormatAttribute(string format)
         {
-            Format = format;
+            this.Format = format;
         }
 
         public string Format { get; private set; }
@@ -635,7 +636,7 @@ namespace ValidicCSharpApp.Annotations
 
         public AspMvcActionAttribute(string anonymousProperty)
         {
-            AnonymousProperty = anonymousProperty;
+            this.AnonymousProperty = anonymousProperty;
         }
 
         public string AnonymousProperty { get; private set; }
@@ -656,7 +657,7 @@ namespace ValidicCSharpApp.Annotations
 
         public AspMvcAreaAttribute(string anonymousProperty)
         {
-            AnonymousProperty = anonymousProperty;
+            this.AnonymousProperty = anonymousProperty;
         }
 
         public string AnonymousProperty { get; private set; }
@@ -678,7 +679,7 @@ namespace ValidicCSharpApp.Annotations
 
         public AspMvcControllerAttribute(string anonymousProperty)
         {
-            AnonymousProperty = anonymousProperty;
+            this.AnonymousProperty = anonymousProperty;
         }
 
         public string AnonymousProperty { get; private set; }
@@ -789,8 +790,7 @@ namespace ValidicCSharpApp.Annotations
     {
     }
 
-    [AttributeUsage(
-        AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Field)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     public sealed class HtmlElementAttributesAttribute : Attribute
     {
@@ -800,20 +800,19 @@ namespace ValidicCSharpApp.Annotations
 
         public HtmlElementAttributesAttribute(string name)
         {
-            Name = name;
+            this.Name = name;
         }
 
         public string Name { get; private set; }
     }
 
-    [AttributeUsage(
-        AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
+    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     public sealed class HtmlAttributeValueAttribute : Attribute
     {
         public HtmlAttributeValueAttribute([NotNull] string name)
         {
-            Name = name;
+            this.Name = name;
         }
 
         [NotNull]
@@ -840,7 +839,7 @@ namespace ValidicCSharpApp.Annotations
     {
         public CollectionAccessAttribute(CollectionAccessType collectionAccessType)
         {
-            CollectionAccessType = collectionAccessType;
+            this.CollectionAccessType = collectionAccessType;
         }
 
         public CollectionAccessType CollectionAccessType { get; private set; }
@@ -884,7 +883,7 @@ namespace ValidicCSharpApp.Annotations
     {
         public AssertionConditionAttribute(AssertionConditionType conditionType)
         {
-            ConditionType = conditionType;
+            this.ConditionType = conditionType;
         }
 
         public AssertionConditionType ConditionType { get; private set; }
@@ -981,11 +980,12 @@ namespace ValidicCSharpApp.Annotations
     {
         public AspChildControlTypeAttribute(string tagName, Type controlType)
         {
-            TagName = tagName;
-            ControlType = controlType;
+            this.TagName = tagName;
+            this.ControlType = controlType;
         }
 
         public string TagName { get; private set; }
+
         public Type ControlType { get; private set; }
     }
 
@@ -1013,7 +1013,7 @@ namespace ValidicCSharpApp.Annotations
     {
         public AspRequiredAttributeAttribute([NotNull] string attribute)
         {
-            Attribute = attribute;
+            this.Attribute = attribute;
         }
 
         public string Attribute { get; private set; }
@@ -1025,7 +1025,7 @@ namespace ValidicCSharpApp.Annotations
     {
         public AspTypePropertyAttribute(bool createConstructorReferences)
         {
-            CreateConstructorReferences = createConstructorReferences;
+            this.CreateConstructorReferences = createConstructorReferences;
         }
 
         public bool CreateConstructorReferences { get; private set; }
@@ -1037,7 +1037,7 @@ namespace ValidicCSharpApp.Annotations
     {
         public RazorImportNamespaceAttribute(string name)
         {
-            Name = name;
+            this.Name = name;
         }
 
         public string Name { get; private set; }
@@ -1049,11 +1049,12 @@ namespace ValidicCSharpApp.Annotations
     {
         public RazorInjectionAttribute(string type, string fieldName)
         {
-            Type = type;
-            FieldName = fieldName;
+            this.Type = type;
+            this.FieldName = fieldName;
         }
 
         public string Type { get; private set; }
+
         public string FieldName { get; private set; }
     }
 

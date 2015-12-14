@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Markup;
-
-namespace ValidicCSharpApp.Helpers
+﻿namespace ValidicCSharpApp.Helpers
 {
+    using System;
+    using System.Windows.Markup;
+
     public abstract class BaseConverter : MarkupExtension
     {
         public override object ProvideValue(IServiceProvider serviceProvider)

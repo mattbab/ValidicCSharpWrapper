@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
-
-namespace ValidicCSharp.Model
+﻿namespace ValidicCSharp.Model
 {
+    using System.Collections.Generic;
+
+    using Newtonsoft.Json;
+
     public class Profile : Me
     {
         [JsonProperty("uid")]

@@ -1,10 +1,12 @@
-﻿using System.Windows.Controls;
-using System.Windows.Input;
-using ValidicCSharp.Model;
-using ValidicCSharpApp.Helpers;
-
-namespace ValidicCSharpApp.Views.DataViews
+﻿namespace ValidicCSharpApp.Views.DataViews
 {
+    using System.Windows.Controls;
+    using System.Windows.Input;
+
+    using ValidicCSharp.Model;
+
+    using ValidicCSharpApp.Helpers;
+
     /// <summary>
     ///     Interaction logic for RoutineView.xaml
     /// </summary>
@@ -12,7 +14,7 @@ namespace ValidicCSharpApp.Views.DataViews
     {
         public RoutineView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void CommandBinding_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)

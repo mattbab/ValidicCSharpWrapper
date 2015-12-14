@@ -1,22 +1,25 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
-using ValidicCSharp;
-using ValidicCSharp.Interfaces;
-using ValidicCSharp.Request;
-
-namespace ValidicCSharpTests
+﻿namespace ValidicCSharpTests
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using NUnit.Framework;
+
+    using ValidicCSharp;
+    using ValidicCSharp.Interfaces;
+    using ValidicCSharp.Request;
+
     public class ClientTests : BaseTests
     {
         private const string UserUnderTest = "51c7dc676dedda04f9000011";
+
         private const string OrganizationUnderTest = "51aca5a06dedda916400002b";
 
         private static List<ICommandFilter> GetFilters
         {
             get
             {
-                var filters = new List<ICommandFilter> {new FromDateFilter {Value = "09-01-01"}};
+                var filters = new List<ICommandFilter> { new FromDateFilter { Value = "09-01-01" } };
                 return filters;
             }
         }

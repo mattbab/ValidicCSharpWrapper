@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ValidicCSharp.Interfaces;
-
-namespace ValidicCSharp.Request
+﻿namespace ValidicCSharp.Request
 {
+    using ValidicCSharp.Interfaces;
+
     public class ValueFilter : BaseFilter, ICommandFilter
     {
         public string Value { get; set; }
-        public string Label { get; set; }
 
+        public string Label { get; set; }
 
         string ICommandFilter.ToString()
         {
-            return "&" + Label + "=" + Value;
+            return "&" + this.Label + "=" + this.Value;
         }
 
         public void Add(string value)
         {
-            Value = value;
+            this.Value = value;
         }
     }
 }

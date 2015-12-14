@@ -1,24 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using ValidicCSharp.Interfaces;
-using ValidicCSharp.Model;
-using ValidicCSharp.Request;
-using SourceFilter = ValidicCSharp.Request.SourceFilter;
-
-namespace ValidicCSharp.Utility
+﻿namespace ValidicCSharp.Utility
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
+    using ValidicCSharp.Interfaces;
+    using ValidicCSharp.Model;
+    using ValidicCSharp.Request;
+
+    using SourceFilter = ValidicCSharp.Request.SourceFilter;
+
     public static class Extensions
     {
         public static ValidicResult<T> ToResult<T>(this string response, string fromString = null)
         {
-            var parameter = typeof (T);
+            var parameter = typeof(T);
 
             if (fromString == null && parameter.Name == "List`1")
+            {
                 fromString = parameter.GenericTypeArguments[0].Name.ToLower();
+            }
 
             var root = JObject.Parse(response);
 
@@ -38,7 +43,9 @@ namespace ValidicCSharp.Utility
                 var name = parameter.Name.ToLower();
                 var element = root[name];
                 if (element == null && fromString != null)
+                {
                     element = root[fromString];
+                }
 
                 var aa = JObject.FromObject(element);
                 obj = JsonConvert.SerializeObject(aa);
@@ -64,11 +71,15 @@ namespace ValidicCSharp.Utility
 
             var tConverted = default(T);
             if (obj != null)
+            {
                 tConverted = JsonConvert.DeserializeObject<T>(obj);
+            }
 
-            var rootObject = new ValidicResult<T> {Object = tConverted};
+            var rootObject = new ValidicResult<T> { Object = tConverted };
             if (summary != null)
+            {
                 rootObject.Summary = JsonConvert.DeserializeObject<Summary>(summary.ToString());
+            }
             ;
             return rootObject;
         }
@@ -80,7 +91,7 @@ namespace ValidicCSharp.Utility
 
         public static T As<T>(this object o)
         {
-            return (T) o;
+            return (T)o;
         }
 
         public static Command GetInformationType(this Command command, CommandType type)
@@ -118,9 +129,13 @@ namespace ValidicCSharp.Utility
             command.Filters.AddAccessTokenFilter(value);
             return command;
         }
+
         #region Add Filter
 
-        public static List<ICommandFilter> AddFilter<T>(this List<ICommandFilter> filterList, FilterType filterType, string value) where T : ICommandFilter, new()
+        public static List<ICommandFilter> AddFilter<T>(
+            this List<ICommandFilter> filterList,
+            FilterType filterType,
+            string value) where T : ICommandFilter, new()
         {
             var filter = (T)filterList.FirstOrDefault(a => a.Type == filterType);
             if (filter == null)
@@ -131,7 +146,6 @@ namespace ValidicCSharp.Utility
             filter.Add(value);
             return filterList;
         }
-
 
         public static List<ICommandFilter> AddSourceFilter(this List<ICommandFilter> filterList, string value)
         {
@@ -148,7 +162,9 @@ namespace ValidicCSharp.Utility
             return AddFilter<ToDateFilter>(filterList, FilterType.ToDate, value);
         }
 
-        public static List<ICommandFilter> AddAuthenticationTokenFilter(this List<ICommandFilter> filterList, string value)
+        public static List<ICommandFilter> AddAuthenticationTokenFilter(
+            this List<ICommandFilter> filterList,
+            string value)
         {
             return AddFilter<AuthenticationTokenFilter>(filterList, FilterType.AuthenticationToken, value);
         }
@@ -157,7 +173,6 @@ namespace ValidicCSharp.Utility
         {
             return AddFilter<AccessTokenFilter>(filterList, FilterType.AccessToken, value);
         }
-
 
         #endregion
     }

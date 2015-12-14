@@ -1,10 +1,12 @@
-﻿using System;
-using System.ComponentModel;
-using Newtonsoft.Json;
-using ValidicCSharp.Utility;
-
-namespace ValidicCSharp.Model
+﻿namespace ValidicCSharp.Model
 {
+    using System;
+    using System.ComponentModel;
+
+    using Newtonsoft.Json;
+
+    using ValidicCSharp.Utility;
+
     public class Measurement : Me
     {
         [JsonProperty("timestamp")]
@@ -33,8 +35,10 @@ namespace ValidicCSharp.Model
             get
             {
                 DateTimeOffset newTimeStamp;
-                if (!Utilities.TryToConvertToDataTimeOffset(Timestamp, UtcOffset, out newTimeStamp))
+                if (!Utilities.TryToConvertToDataTimeOffset(this.Timestamp, this.UtcOffset, out newTimeStamp))
+                {
                     return DateTimeOffset.MinValue.Date;
+                }
 
                 return newTimeStamp.DateTime;
             }

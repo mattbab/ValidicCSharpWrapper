@@ -1,7 +1,7 @@
-﻿using GalaSoft.MvvmLight;
-
-namespace ValidicCSharpApp.ViewModels
+﻿namespace ValidicCSharpApp.ViewModels
 {
+    using GalaSoft.MvvmLight;
+
     public class OrganizationViewModel : ViewModelBase
     {
     }

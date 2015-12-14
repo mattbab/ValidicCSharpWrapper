@@ -1,11 +1,14 @@
-﻿using System.Diagnostics;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Navigation;
-using ValidicCSharpApp.Helpers;
-
-namespace ValidicCSharpApp.Views.DataViews
+﻿namespace ValidicCSharpApp.Views.DataViews
 {
+    using System.Diagnostics;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+    using System.Windows.Navigation;
+
+    using ValidicCSharp.Model;
+
+    using ValidicCSharpApp.Helpers;
+
     /// <summary>
     ///     Interaction logic for AppsView.xaml
     /// </summary>
@@ -13,7 +16,7 @@ namespace ValidicCSharpApp.Views.DataViews
     {
         public AppsView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -29,7 +32,7 @@ namespace ValidicCSharpApp.Views.DataViews
 
         private void CommandBinding_OnExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            ViewHelper.CopyCommandOnExecuted<ValidicCSharp.Model.App>(sender, e);
+            ViewHelper.CopyCommandOnExecuted<App>(sender, e);
         }
     }
 }

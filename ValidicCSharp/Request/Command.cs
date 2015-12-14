@@ -1,35 +1,43 @@
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using ValidicCSharp.Interfaces;
-using ValidicCSharp.Model;
-using ValidicCSharp.Utility;
-
 namespace ValidicCSharp.Request
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.Serialization;
+
+    using Newtonsoft.Json;
+
+    using ValidicCSharp.Interfaces;
+    using ValidicCSharp.Model;
+    using ValidicCSharp.Utility;
+
     public class Command
     {
         public Command()
         {
-            NoCache = Utilities.GenerateRandom();
-            Filters = new List<ICommandFilter>();
-            Payload = Formatting.Indented;
+            this.NoCache = Utilities.GenerateRandom();
+            this.Filters = new List<ICommandFilter>();
+            this.Payload = Formatting.Indented;
         }
 
         public CommandType Type { get; set; }
+
         public List<ICommandFilter> Filters { get; set; }
+
         public int NoCache { get; set; }
 
         //Pieces of the request
         public string OrganizationId { get; set; }
+
         public bool Organization { get; set; }
+
         public bool User { get; set; }
+
         public string UserId { get; set; }
 
         public HttpMethod Method { get; set; }
+
         public object Payload { get; set; }
+
         public bool Latest { get; set; }
 
         public override string ToString()
@@ -37,26 +45,44 @@ namespace ValidicCSharp.Request
             var target = "";
 
             // User
-            if (UserId != null)
-                target = "/" + UserId + target;
-            if (User)
+            if (this.UserId != null)
+            {
+                target = "/" + this.UserId + target;
+            }
+            if (this.User)
+            {
                 target = "/users" + target;
+            }
 
             // Organization
-            if (OrganizationId != null)
-                target = "/" + OrganizationId + target;
-            if (Organization)
+            if (this.OrganizationId != null)
+            {
+                target = "/" + this.OrganizationId + target;
+            }
+            if (this.Organization)
+            {
                 target = "organizations" + target;
+            }
 
-            if (Type != CommandType.None)
-                target += "/" + Type.ToString().ToLower() + (Latest ? "/latest" : "") + ".json";
+            if (this.Type != CommandType.None)
+            {
+                target += "/" + this.Type.ToString().ToLower() + (this.Latest ? "/latest" : "") + ".json";
+            }
 
-            else if (Type == CommandType.None && (UserId != null || Payload != null)) target += ".json";
-            else target += "/";
+            else if (this.Type == CommandType.None && (this.UserId != null || this.Payload != null))
+            {
+                target += ".json";
+            }
+            else
+            {
+                target += "/";
+            }
 
-            target += "?nocache=" + NoCache;
-            if (Filters != null && Filters.Count > 0)
-                target = Filters.Aggregate(target, (current, commandFilter) => current + commandFilter.ToString());
+            target += "?nocache=" + this.NoCache;
+            if (this.Filters != null && this.Filters.Count > 0)
+            {
+                target = this.Filters.Aggregate(target, (current, commandFilter) => current + commandFilter.ToString());
+            }
 
             return target;
         }
@@ -65,26 +91,41 @@ namespace ValidicCSharp.Request
     public enum CommandType
     {
         None = 0,
+
         Apps,
+
         Users,
+
         Me,
+
         Profile,
+
         Fitness,
+
         Routine,
+
         Nutrition,
+
         Sleep,
+
         Weight,
+
         Diabetes,
+
         Biometrics,
+
         refresh_token,
-        [DataMember(Name = "tobacco_cessation")] 
+
+        [DataMember(Name = "tobacco_cessation")]
         Tobacco_Cessation,
+
         Custom
-         }
+    }
 
     public enum ClassType
     {
         Organizations = 0,
+
         Users
     }
 
@@ -165,8 +206,11 @@ namespace ValidicCSharp.Request
     public enum HttpMethod
     {
         GET = 0,
+
         POST,
+
         DELETE,
+
         PUT
     }
 }

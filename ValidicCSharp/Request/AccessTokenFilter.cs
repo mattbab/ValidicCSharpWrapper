@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ValidicCSharp.Interfaces;
-
-namespace ValidicCSharp.Request
+﻿namespace ValidicCSharp.Request
 {
-    public class AccessTokenFilter: ValueFilter
+    using ValidicCSharp.Interfaces;
+
+    public class AccessTokenFilter : ValueFilter
     {
         public AccessTokenFilter()
         {
-            Type = FilterType.AccessToken;
-            Label = "access_token";
+            this.Type = FilterType.AccessToken;
+            this.Label = "access_token";
         }
     }
-
 }

@@ -1,10 +1,12 @@
-﻿using System.Diagnostics;
-using System.Text;
-using NUnit.Framework;
-using ValidicCSharp;
-
-namespace ValidicCSharpTests
+﻿namespace ValidicCSharpTests
 {
+    using System.Diagnostics;
+    using System.Text;
+
+    using NUnit.Framework;
+
+    using ValidicCSharp;
+
     [TestFixture]
     public class BaseTests
     {
@@ -15,17 +17,17 @@ namespace ValidicCSharpTests
         {
             Client.EnableLogging = false;
             Client.AddLine += a =>
-            {
-                _log.AppendLine(a.Name);
-                _log.AppendLine(a.Address);
-                _log.AppendLine(a.Json);
-            };
+                {
+                    this._log.AppendLine(a.Name);
+                    this._log.AppendLine(a.Address);
+                    this._log.AppendLine(a.Json);
+                };
         }
 
         [TestFixtureTearDown]
         public void TearDown()
         {
-            Debug.WriteLine(_log);
+            Debug.WriteLine(this._log);
         }
     }
 }
