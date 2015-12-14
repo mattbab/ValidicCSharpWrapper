@@ -156,7 +156,7 @@ namespace ValidicCSharpApp.ViewModels
             if (oac == null)
                 return;
 
-            var client = new Client {AccessToken = oac.AccessToken};
+            var client = new Client(oac.AccessToken);
             var result = client.GetEnterpriseUsers(oac.OrganizationId);
             if (result == null)
                 return;
@@ -251,7 +251,7 @@ namespace ValidicCSharpApp.ViewModels
             if (oac == null)
                 return;
 
-            var client = new Client { AccessToken = oac.AccessToken };
+            var client = new Client(oac.AccessToken);
             var command = new Command().FromOrganization(oac.OrganizationId);
 
             var json = client.PerformCommand(command);
@@ -285,7 +285,7 @@ namespace ValidicCSharpApp.ViewModels
             if (oac == null)
                 return;
 
-            var client = new Client { AccessToken = oac.AccessToken };
+            var client = new Client(oac.AccessToken);
             var result = await client.GetUserRefreshTokenAsync(record.Me.Id, oac.OrganizationId);
             record.RefreshToken = result.Object;
         }
@@ -338,7 +338,7 @@ namespace ValidicCSharpApp.ViewModels
             if (oac == null)
                 return null;
 
-            var client = new Client {AccessToken = oac.AccessToken};
+            var client = new Client(oac.AccessToken);
             var command = new Command().FromOrganization(oac.OrganizationId)
                 .GetInformationType(commandType);
             // .GetLatest();

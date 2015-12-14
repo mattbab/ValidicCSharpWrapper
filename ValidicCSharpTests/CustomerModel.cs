@@ -14,7 +14,7 @@ namespace ValidicCSharpTests
 
         public AddUserResponse AddUser(string uid, Profile profile = null)
         {
-            var client = new Client { AccessToken = Credentials.AccessToken };
+            var client = new Client(Credentials.AccessToken);
             var command = new Command()
                 .AddUser(new AddUserRequest
                 {

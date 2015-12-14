@@ -24,7 +24,7 @@ namespace ValidicCSharpTests
         [Test]
         public void EnterpriseBulkSleepDataPopulates()
         {
-            var client = new Client {AccessToken = "ENTERPRISE_KEY"};
+            var client = new Client("ENTERPRISE_KEY");
             var sleepData = client.GetEnterpriseSleepData(OrganizationUnderTest, GetFilters);
 
             Assert.IsTrue(sleepData.Object.Count > 0);
@@ -34,7 +34,7 @@ namespace ValidicCSharpTests
         [Test]
         public void EnterpriseUserDiabetesDataPopulates()
         {
-            var client = new Client {AccessToken = "ENTERPRISE_KEY"};
+            var client = new Client("ENTERPRISE_KEY");
             var diabetesData = client.GetEnterpriseUserDiabetesData(UserUnderTest, OrganizationUnderTest, GetFilters);
 
             Assert.IsTrue(diabetesData.Object.Count > 0);
@@ -44,7 +44,7 @@ namespace ValidicCSharpTests
         [Test]
         public void GetEnterpriseFitnessData()
         {
-            var client = new Client {AccessToken = "ENTERPRISE_KEY"};
+            var client = new Client("ENTERPRISE_KEY");
             var data = client.GetEnterpriseFitnessData(OrganizationUnderTest, GetFilters);
             Assert.IsTrue(data.Object.Count > 0);
             Assert.IsTrue(data.Object.First().Id != null);
@@ -53,7 +53,7 @@ namespace ValidicCSharpTests
         [Test]
         public void GetEnterpriseUserFitnessData()
         {
-            var client = new Client {AccessToken = "ENTERPRISE_KEY"};
+            var client = new Client("ENTERPRISE_KEY");
             ;
             var data = client.GetEnterpriseUserFitnessData(UserUnderTest, OrganizationUnderTest, GetFilters);
             Assert.IsTrue(data.Object.Count > 0);

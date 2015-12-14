@@ -37,7 +37,7 @@ namespace ValidicCSharpTests
         [Test]
         public void AppModelPopulatesCorrectly()
         {
-            var client = new Client {AccessToken = Customer.Credentials.AccessToken};
+            var client = new Client(Customer.Credentials.AccessToken);
             ;
             var command = new Command()
                 .FromOrganization(Customer.Credentials.OrganizationId)
@@ -52,7 +52,7 @@ namespace ValidicCSharpTests
         [Test]
         public void BiometricsModelPopulatesCorrectly()
         {
-            var client = new Client {AccessToken = Customer.Credentials.AccessToken};
+            var client = new Client(Customer.Credentials.AccessToken);
             ;
             var command = new Command()
                 .GetInformationType(CommandType.Biometrics)
@@ -98,7 +98,7 @@ namespace ValidicCSharpTests
         [Test]
         public void DiabetesModelPopulatesCorrectly()
         {
-            var client = new Client {AccessToken = Customer.Credentials.AccessToken};
+            var client = new Client(Customer.Credentials.AccessToken);
             ;
             var command = new Command()
                 .GetInformationType(CommandType.Diabetes)
@@ -114,7 +114,7 @@ namespace ValidicCSharpTests
         [Test]
         public void FitnessModelPopulatesCorrectly()
         {
-            var client = new Client {AccessToken = Customer.Credentials.AccessToken};
+            var client = new Client(Customer.Credentials.AccessToken);
             ;
             var command = new Command()
                 .FromOrganization(Customer.Credentials.OrganizationId)
@@ -131,7 +131,7 @@ namespace ValidicCSharpTests
         [Test]
         public void FitnessModelPopulatesFromEnterpriseCall()
         {
-            var client = new Client {AccessToken = Customer.Credentials.AccessToken};
+            var client = new Client(Customer.Credentials.AccessToken);
             var command = new Command()
                 .FromOrganization(Customer.Credentials.OrganizationId)
                 .GetInformationType(CommandType.Fitness)
@@ -145,7 +145,7 @@ namespace ValidicCSharpTests
         [Test]
         public async Task InitialDeserializationWorksAsync()
         {
-            var client = new Client {AccessToken = Customer.Credentials.AccessToken};
+            var client = new Client(Customer.Credentials.AccessToken);
             var command = new Command().
                 FromOrganization(Customer.Credentials.OrganizationId).
                 FromDate("09-01-01");
@@ -162,7 +162,7 @@ namespace ValidicCSharpTests
         [Test]
         public void ListOfUsersFromOrganizationParsesCorrectly()
         {
-            var client = new Client {AccessToken = Customer.Credentials.AccessToken};
+            var client = new Client(Customer.Credentials.AccessToken);
             var command = new Command()
                 .FromOrganization(Customer.Credentials.OrganizationId)
                 .GetUsers();
@@ -175,12 +175,12 @@ namespace ValidicCSharpTests
         [Test]
         public async void MyModelPopultesCorrectlyAsync()
         {
-            var client = new Client { AccessToken = Customer.Credentials.AccessToken };
+            var client = new Client(Customer.Credentials.AccessToken);
             // 1. Get user "authentication_token"
             var refreshToken = await client.GetUserRefreshTokenAsync(Customer.Profile.Uid, Customer.Credentials.OrganizationId);
 
             // 2
-            client = new Client{AccessToken = null};
+            client = new Client(null);
             var command = new Command()
                 .GetInformationType(CommandType.Me)
                 .AuthenticationToken(refreshToken.Object.AuthenticationToken);
@@ -194,7 +194,7 @@ namespace ValidicCSharpTests
         [Test]
         public void NutritionModelPopulatesCorrectly()
         {
-            var client = new Client {AccessToken = Customer.Credentials.AccessToken};
+            var client = new Client(Customer.Credentials.AccessToken);
             ;
             var command = new Command()
                 .FromOrganization(Customer.Credentials.OrganizationId)
@@ -209,13 +209,13 @@ namespace ValidicCSharpTests
         [Test]
         public async Task ProfileModelPopulatesCorrectly()
         {
-            var client = new Client { AccessToken = Customer.Credentials.AccessToken };
+            var client = new Client(Customer.Credentials.AccessToken);
 
             // 1. Get user "authentication_token"
             var refreshToken = await client.GetUserRefreshTokenAsync(Customer.Profile.Uid, Customer.Credentials.OrganizationId);
 
             // 2
-            client = new Client { AccessToken = null };
+            client = new Client(null);
             var command = new Command()
                 .AuthenticationToken(refreshToken.Object.AuthenticationToken)
                 .GetInformationType(CommandType.Profile);
@@ -229,7 +229,7 @@ namespace ValidicCSharpTests
         [Test]
         public void RoutineModelPopulatesCorrectly()
         {
-            var client = new Client {AccessToken = Customer.Credentials.AccessToken};
+            var client = new Client(Customer.Credentials.AccessToken);
             ;
             var command = new Command()
                 .FromOrganization(Customer.Credentials.OrganizationId)
@@ -244,7 +244,7 @@ namespace ValidicCSharpTests
         [Test]
         public void SleepModelPopulatesCorrectly()
         {
-            var client = new Client {AccessToken = Customer.Credentials.AccessToken};
+            var client = new Client(Customer.Credentials.AccessToken);
             var command = new Command()
                 .FromOrganization(Customer.Credentials.OrganizationId)
                 .FromUser(Customer.Profile.Uid)
@@ -259,7 +259,7 @@ namespace ValidicCSharpTests
         [Test]
         public void TobaccoOrgModelPopulatesCorrectly()
         {
-            var client = new Client {AccessToken = Customer.Credentials.AccessToken};
+            var client = new Client(Customer.Credentials.AccessToken);
             var command = new Command()
                 .GetInformationType(CommandType.Tobacco_Cessation)
                 .FromOrganization(Customer.Credentials.OrganizationId)
@@ -273,7 +273,7 @@ namespace ValidicCSharpTests
         [Test]
         public void WeightModelPopulatesCorrectly()
         {
-            var client = new Client {AccessToken = Customer.Credentials.AccessToken};
+            var client = new Client(Customer.Credentials.AccessToken);
             ;
             var command = new Command()
                 .FromOrganization(Customer.Credentials.OrganizationId)

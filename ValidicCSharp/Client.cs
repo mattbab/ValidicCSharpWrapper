@@ -11,13 +11,23 @@ using ValidicCSharp.Utility;
 
 namespace ValidicCSharp
 {
+    using System.Runtime.CompilerServices;
+
     public class Client
     {
         public static bool EnableLogging = false;
-        public static string ApplicationId;
         public static Action<LogItem> AddLine = null;
         private readonly Uri _baseUrl = new Uri("https://api.validic.com/v1/");
-        public string AccessToken = "DEMO_KEY";
+
+        public string AccessToken { get; private set; }
+
+        public Client()
+            : this("DEMO_KEY") { }
+
+        public Client(string accessToken)
+        {
+            this.AccessToken = accessToken;
+        }
 
         private static void OnAddLine(LogItem l)
         {
